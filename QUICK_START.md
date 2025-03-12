@@ -1,161 +1,298 @@
 # AstroShield Integration Quick Start Guide
 
-This guide provides step-by-step instructions to quickly get started with the AstroShield integration package. Follow these steps to set up your environment and begin integrating with AstroShield's APIs and Kafka streams.
+This guide provides step-by-step instructions to quickly get started with the AstroShield integration package.
 
 ## Prerequisites
 
-- Python 3.8+ (for API examples)
-- Java 11+ (for Kafka Java examples)
-- Node.js 14+ (for Kafka JavaScript examples)
-- Access credentials for AstroShield services (contact your AstroShield representative)
+Before you begin, ensure you have:
 
-## 1. Set Up Your Environment
+- API credentials (contact jack@lattis.io to obtain)
+- Kafka cluster access information (provided with your subscription)
+- Development environment with one of the following:
+  - Python 3.8+
+  - Java 11+
+  - Node.js 14+
 
-### Clone or Download the Integration Package
+## 1. API Integration
 
-```bash
-# If using Git
-git clone https://github.com/astroshield/integration-package.git
-cd integration-package
+### Step 1: Configure Authentication
 
-# Or extract the provided ZIP file
-unzip astroshield-integration-package.zip
-cd integration-package
+Choose one of the authentication methods:
+
+#### JWT Authentication
+
+```python
+# Python example
+import requests
+
+auth_url = "https://api.astroshield.com/auth/token"
+credentials = {
+    "username": "your-username",
+    "password": "your-password"
+}
+
+response = requests.post(auth_url, json=credentials)
+token = response.json()["token"]
+
+# Use token in subsequent requests
+headers = {
+    "Authorization": f"Bearer {token}"
+}
 ```
 
-### Install Dependencies
+#### API Key Authentication
 
-#### For Python Examples
-
-```bash
-# Create a virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install requests
+```python
+# Python example
+headers = {
+    "X-API-Key": "your-api-key"
+}
 ```
 
-#### For Java Examples
+### Step 2: Make API Requests
 
-```bash
-# Using Maven
-cd examples/java
-mvn clean install
+```python
+# Python example - Get spacecraft list
+import requests
+
+url = "https://api.astroshield.com/v1/spacecraft"
+headers = {
+    "Authorization": "Bearer your-token"  # or "X-API-Key": "your-api-key"
+}
+
+response = requests.get(url, headers=headers)
+spacecraft_list = response.json()
 ```
 
-#### For JavaScript Examples
+### Step 3: Handle Responses and Errors
 
-```bash
-# Using npm
-cd examples/javascript
-npm install node-rdkafka uuid
+```python
+# Python example - Error handling
+import requests
+
+def make_api_request(url, headers):
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()  # Raise exception for 4XX/5XX responses
+        return response.json()
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 401:
+            # Handle authentication error
+            print("Authentication failed. Refresh your token.")
+        elif e.response.status_code == 429:
+            # Handle rate limiting
+            print("Rate limit exceeded. Implement backoff.")
+        else:
+            print(f"HTTP error occurred: {e}")
+    except requests.exceptions.RequestException as e:
+        print(f"Request error occurred: {e}")
+    return None
 ```
 
-## 2. Configure Your Credentials
+## 2. Kafka Integration
 
-### API Credentials
+### Step 1: Configure Kafka Client
 
-Create a `.env` file in the root directory with your API credentials:
-
-```
-ASTROSHIELD_USERNAME=your-username
-ASTROSHIELD_PASSWORD=your-password
-ASTROSHIELD_API_KEY=your-api-key  # Optional, if using API key authentication
-```
-
-### Kafka Credentials
-
-Edit the `config/kafka-client.properties` file and replace the placeholder values with your actual credentials:
+Create a file named `kafka.properties` with the following content:
 
 ```properties
-# Replace these values
+bootstrap.servers=kafka.astroshield.com:9093
+security.protocol=SASL_SSL
+sasl.mechanism=PLAIN
 sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="your-username" password="your-password";
 ```
 
-## 3. Test the API Connection
+### Step 2: Create a Kafka Consumer
 
-Run the Python API client example to verify your connection to the AstroShield API:
+#### Python (using confluent-kafka)
 
-```bash
-cd examples/python
-python api_client.py
+```python
+# Install with: pip install confluent-kafka
+from confluent_kafka import Consumer
+import json
+
+# Configure consumer
+conf = {
+    'bootstrap.servers': 'kafka.astroshield.com:9093',
+    'security.protocol': 'SASL_SSL',
+    'sasl.mechanism': 'PLAIN',
+    'sasl.username': 'your-username',
+    'sasl.password': 'your-password',
+    'group.id': 'my-consumer-group',
+    'auto.offset.reset': 'earliest'
+}
+
+# Create consumer
+consumer = Consumer(conf)
+
+# Subscribe to topic
+consumer.subscribe(['ss5.launch.prediction'])
+
+# Process messages
+try:
+    while True:
+        msg = consumer.poll(1.0)
+        if msg is None:
+            continue
+        if msg.error():
+            print(f"Consumer error: {msg.error()}")
+            continue
+            
+        # Process message
+        try:
+            value = json.loads(msg.value().decode('utf-8'))
+            print(f"Received message: {value}")
+            # Process the message according to your application logic
+        except Exception as e:
+            print(f"Error processing message: {e}")
+            
+except KeyboardInterrupt:
+    pass
+finally:
+    consumer.close()
 ```
 
-If successful, you should see output showing the API health status and other information.
+#### Java (using Kafka Client)
 
-## 4. Test the Kafka Connection
+```java
+// See examples/java/KafkaConsumerExample.java for complete code
+import org.apache.kafka.clients.consumer.*;
+import java.time.Duration;
+import java.util.Collections;
+import java.util.Properties;
 
-### Using Java
-
-```bash
-cd examples/java
-# Compile and run the Kafka consumer example
-javac -cp "path/to/dependencies/*" KafkaConsumerExample.java
-java -cp ".:path/to/dependencies/*" com.astroshield.examples.KafkaConsumerExample
+public class KafkaConsumerExample {
+    public static void main(String[] args) {
+        Properties props = new Properties();
+        props.put("bootstrap.servers", "kafka.astroshield.com:9093");
+        props.put("security.protocol", "SASL_SSL");
+        props.put("sasl.mechanism", "PLAIN");
+        props.put("sasl.jaas.config", "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"your-username\" password=\"your-password\";");
+        props.put("group.id", "my-consumer-group");
+        props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+        
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Collections.singletonList("ss5.launch.prediction"));
+        
+        try {
+            while (true) {
+                ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+                for (ConsumerRecord<String, String> record : records) {
+                    System.out.printf("Offset = %d, Key = %s, Value = %s%n", 
+                                     record.offset(), record.key(), record.value());
+                    // Process the message according to your application logic
+                }
+            }
+        } finally {
+            consumer.close();
+        }
+    }
+}
 ```
 
-### Using JavaScript
+### Step 3: Create a Kafka Producer
 
-```bash
-cd examples/javascript
-node kafka-producer.js
+#### JavaScript (using node-rdkafka)
+
+```javascript
+// Install with: npm install node-rdkafka
+const Kafka = require('node-rdkafka');
+
+// Configure producer
+const producer = new Kafka.Producer({
+  'bootstrap.servers': 'kafka.astroshield.com:9093',
+  'security.protocol': 'SASL_SSL',
+  'sasl.mechanism': 'PLAIN',
+  'sasl.username': 'your-username',
+  'sasl.password': 'your-password',
+  'dr_cb': true  // Delivery report callback
+});
+
+// Connect to the broker
+producer.connect();
+
+// Wait for the ready event before proceeding
+producer.on('ready', function() {
+  try {
+    // Create a message
+    const message = {
+      header: {
+        messageId: "msg-" + Date.now(),
+        timestamp: new Date().toISOString(),
+        source: "my-application"
+      },
+      payload: {
+        // Message-specific payload
+        // See schema definitions for required fields
+      }
+    };
+    
+    // Send the message
+    producer.produce(
+      'ss5.telemetry.data',  // Topic
+      null,                  // Partition (null = librdkafka assigns)
+      Buffer.from(JSON.stringify(message)),  // Message content
+      'key',                 // Optional message key
+      Date.now()             // Optional timestamp
+    );
+    
+    console.log('Message sent successfully');
+  } catch (err) {
+    console.error('Error producing message:', err);
+  }
+});
+
+// Log any errors
+producer.on('event.error', function(err) {
+  console.error('Error from producer:', err);
+});
+
+// Delivery report handler
+producer.on('delivery-report', function(err, report) {
+  if (err) {
+    console.error('Delivery failed:', err);
+  } else {
+    console.log('Delivery successful:', report);
+  }
+});
+
+// Wait for messages to be delivered before exiting
+setTimeout(function() {
+  producer.flush(10000, function() {
+    producer.disconnect();
+  });
+}, 5000);
 ```
 
-## 5. Explore the API with Postman
+## 3. Testing Your Integration
+
+### API Testing with Postman
 
 1. Import the Postman collection from `postman/AstroShield_API.postman_collection.json`
 2. Import the environment from `postman/AstroShield_API.postman_environment.json`
 3. Update the environment variables with your credentials
-4. Test the endpoints in the collection
+4. Run the collection to test all endpoints
 
-## 6. Understand the Message Schemas
+### Kafka Testing
 
-Review the JSON Schema files in the `schemas/` directory to understand the structure of messages for each Kafka topic:
-
-- `ss5.launch.prediction.schema.json`: Schema for launch prediction messages
-- `ss5.telemetry.data.schema.json`: Schema for telemetry data messages
-- `ss5.conjunction.events.schema.json`: Schema for conjunction event messages
-- `ss5.cyber.threats.schema.json`: Schema for cyber threat messages
-
-## 7. Implement Your Integration
-
-Use the provided examples as a starting point for your own integration:
-
-1. Modify the API client to call the endpoints relevant to your use case
-2. Adapt the Kafka consumers and producers to process the topics you're interested in
-3. Implement your business logic to handle the data from AstroShield
-
-## 8. Monitor and Troubleshoot
-
-- Check the logs from your applications for any errors
-- Verify that your Kafka consumers are receiving messages
-- Ensure that your API requests are returning the expected responses
+1. Use the consumer examples to verify you can receive messages from the topics
+2. Use the producer examples to send test messages to the topics
+3. Verify message format against the JSON schemas in the `schemas/` directory
 
 ## Next Steps
 
-- Review the full documentation in the `README.md` file
-- Explore the OpenAPI specification in `api/openapi.yaml` for detailed API information
-- Contact AstroShield support if you encounter any issues:
-  - Email: integration-support@astroshield.com
-  - Support Portal: https://support.astroshield.com
+- Review the full API documentation in `api/openapi.yaml`
+- Explore the example code in the `examples/` directory
+- Implement error handling and retry logic
+- Set up monitoring for your integration
+- Contact jack@lattis.io if you need assistance
 
-## Common Issues and Solutions
+## Troubleshooting
 
-### API Connection Issues
+If you encounter issues:
 
-- **401 Unauthorized**: Check your credentials and ensure they are correctly set in your environment
-- **403 Forbidden**: Verify that your account has the necessary permissions
-- **Connection Timeout**: Check your network configuration and firewall settings
-
-### Kafka Connection Issues
-
-- **Authentication Failed**: Verify your Kafka credentials in the properties file
-- **Connection Refused**: Check that you have network access to the Kafka brokers
-- **Topic Not Found**: Ensure you're using the correct topic names and have the necessary permissions
-
-### Schema Validation Errors
-
-- Ensure your messages conform to the JSON Schema definitions
-- Check for required fields and correct data types
-- Validate your messages against the schemas before sending them 
+1. Verify your credentials and connection settings
+2. Check the [README.md](README.md) for common issues and solutions
+3. Review the logs for error messages
+4. Contact jack@lattis.io for support 
