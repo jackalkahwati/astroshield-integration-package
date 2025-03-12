@@ -7,6 +7,8 @@ This integration package provides all the necessary resources for integrating wi
 - [Getting Started](#getting-started)
 - [Authentication](#authentication)
 - [Available Kafka Topics](#available-kafka-topics)
+- [System Architecture](#system-architecture)
+- [Message Traceability](#message-traceability)
 - [Integration Best Practices](#integration-best-practices)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
@@ -86,14 +88,81 @@ sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule require
 
 ## Available Kafka Topics
 
-| Topic | Description | Schema |
-|-------|-------------|--------|
-| `ss0.sensor.heartbeat` | Sensor health monitoring data | [Schema](schemas/ss0.sensor.heartbeat.schema.json) |
-| `ss2.data.state-vector` | Spacecraft state vectors | [Schema](schemas/ss2.data.state-vector.schema.json) |
-| `ss5.launch.prediction` | Predictions of upcoming launches | [Schema](schemas/ss5.launch.prediction.schema.json) |
-| `ss5.telemetry.data` | Telemetry data from spacecraft | [Schema](schemas/ss5.telemetry.data.schema.json) |
-| `ss5.conjunction.events` | Conjunction events between spacecraft | [Schema](schemas/ss5.conjunction.events.schema.json) |
-| `ss5.cyber.threats` | Cyber threat notifications | [Schema](schemas/ss5.cyber.threats.schema.json) |
+| Topic | Description | Schema | Subsystem |
+|-------|-------------|--------|-----------|
+| `ss0.sensor.heartbeat` | Sensor health monitoring data | [Schema](schemas/ss0.sensor.heartbeat.schema.json) | Subsystem 0 (Data Ingestion) |
+| `ss2.data.state-vector` | Spacecraft state vectors | [Schema](schemas/ss2.data.state-vector.schema.json) | Subsystem 2 (State Estimation) |
+| `ss4.ccdm.detection` | CCDM behavior detection | [Schema](schemas/ss4.ccdm.detection.schema.json) | Subsystem 4 (CCDM) |
+| `ss5.launch.prediction` | Predictions of upcoming launches | [Schema](schemas/ss5.launch.prediction.schema.json) | Subsystem 5 (Hostility Monitoring) |
+| `ss5.telemetry.data` | Telemetry data from spacecraft | [Schema](schemas/ss5.telemetry.data.schema.json) | Subsystem 5 (Hostility Monitoring) |
+| `ss5.conjunction.events` | Conjunction events between spacecraft | [Schema](schemas/ss5.conjunction.events.schema.json) | Subsystem 5 (Hostility Monitoring) |
+| `ss5.cyber.threats` | Cyber threat notifications | [Schema](schemas/ss5.cyber.threats.schema.json) | Subsystem 5 (Hostility Monitoring) |
+
+## System Architecture
+
+AstroShield is organized into a modular subsystem architecture that enables distributed processing and scalability. Each subsystem focuses on specific aspects of space domain awareness:
+
+### Subsystem 0: Data Ingestion
+Responsible for ingesting data from various sensors and external sources. This subsystem handles the initial processing of raw data and makes it available to other subsystems through Kafka topics.
+
+### Subsystem 1: Target Modeling
+Maintains a database of known space objects, their capabilities, and characteristics. This subsystem provides reference data for object identification and threat assessment.
+
+### Subsystem 2: State Estimation
+Performs orbit determination, correlation, maneuver detection, and propagation. This subsystem is responsible for maintaining accurate state vectors for tracked objects and predicting their future positions.
+
+### Subsystem 3: Command and Control (C2)
+Handles sensor tasking and orchestration to optimize observation collection. This subsystem prioritizes objects for tracking based on inputs from other subsystems.
+
+### Subsystem 4: CCDM Detection
+Focuses on detecting Camouflage, Concealment, Deception, and Maneuvering behaviors. This subsystem analyzes pattern-of-life violations and anomalous behaviors that might indicate hostile intent.
+
+### Subsystem 5: Hostility Monitoring
+Monitors for potential threats, including conjunction events, cyber threats, and launch predictions. This subsystem provides early warning of potential hostile activities.
+
+### Subsystem 6: Threat Assessment
+Integrates data from all other subsystems to provide comprehensive threat assessments and recommended actions.
+
+## Message Traceability
+
+AstroShield implements message traceability to track the lineage of information as it flows through the system. This enables users to understand how detections, alerts, and assessments were derived from raw data.
+
+### Traceability Headers
+
+All Kafka messages include traceability information in their headers:
+
+- `traceId`: A unique identifier that follows the processing chain across multiple messages
+- `parentMessageIds`: References to previous messages that contributed to the current message
+
+### Implementing Traceability
+
+When consuming messages and producing new ones based on that data:
+
+1. Extract the `traceId` from the incoming message
+2. Use the same `traceId` in your outgoing message
+3. Add the `messageId` of the incoming message to the `parentMessageIds` array in your outgoing message
+
+Example in Python:
+```python
+def process_message(incoming_message):
+    # Process the message data
+    result = analyze_data(incoming_message['payload'])
+    
+    # Create a new message with traceability
+    outgoing_message = {
+        'header': {
+            'messageId': str(uuid.uuid4()),
+            'timestamp': datetime.utcnow().isoformat(),
+            'source': 'my-application',
+            'messageType': 'my-message-type',
+            'traceId': incoming_message['header']['traceId'],
+            'parentMessageIds': [incoming_message['header']['messageId']]
+        },
+        'payload': result
+    }
+    
+    return outgoing_message
+```
 
 ## Integration Best Practices
 
