@@ -1,0 +1,203 @@
+[
+  {
+    "header": {
+      "messageId": "sv-28f3e714-37d3-4fb9-8f3c-dfc8933d721f",
+      "timestamp": "2023-10-15T14:23:15.321Z",
+      "source": "ss2_state_estimation",
+      "messageType": "ss2.state.vector",
+      "traceId": "trace-a6d2ba3c-54b4-4e20-95d7-1b25d7d542ef",
+      "parentMessageIds": ["obs-892f5c1a-4e19-49bc-9f12-c4a87bb3d442"]
+    },
+    "payload": {
+      "stateVectorId": "sv-28f3e714-37d3-4fb9-8f3c-dfc8933d721f",
+      "objectId": "SATCAT-25544",
+      "objectName": "ISS (ZARYA)",
+      "epoch": "2023-10-15T14:23:15.000Z",
+      "referenceFrame": "GCRF",
+      "position": {
+        "x": 6371.0089,
+        "y": -2467.3721,
+        "z": 1023.5903
+      },
+      "velocity": {
+        "x": -4.7212,
+        "y": -1.8013,
+        "z": 5.4873
+      },
+      "covariance": [
+        [0.0001, 0.0, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.0001, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0001, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.000001, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.000001, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.0, 0.000001]
+      ],
+      "metadata": {
+        "source": "COMBINED",
+        "dataQuality": "HIGH",
+        "orbitType": "LEO"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "sv-7bc9e416-23a1-49d9-98d5-463abf1e5924",
+      "timestamp": "2023-10-15T14:23:20.123Z",
+      "source": "ss2_state_estimation",
+      "messageType": "ss2.state.vector",
+      "traceId": "trace-a6d2ba3c-54b4-4e20-95d7-1b25d7d542ef",
+      "parentMessageIds": ["obs-892f5c1a-4e19-49bc-9f12-c4a87bb3d442"]
+    },
+    "payload": {
+      "stateVectorId": "sv-7bc9e416-23a1-49d9-98d5-463abf1e5924",
+      "objectId": "SATCAT-43013",
+      "objectName": "STARLINK-1047",
+      "epoch": "2023-10-15T14:23:20.000Z",
+      "referenceFrame": "GCRF",
+      "position": {
+        "x": 5899.3145,
+        "y": 3899.3413,
+        "z": 782.3487
+      },
+      "velocity": {
+        "x": -5.3871,
+        "y": 3.9932,
+        "z": 2.0989
+      },
+      "covariance": [
+        [0.0003, 0.0, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.0003, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0003, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.000001, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.000001, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.0, 0.000001]
+      ],
+      "metadata": {
+        "source": "RADAR",
+        "dataQuality": "MEDIUM",
+        "orbitType": "LEO"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "sv-1aef5d23-9b71-42c8-8731-49cca137b521",
+      "timestamp": "2023-10-15T14:23:25.567Z",
+      "source": "ss2_state_estimation",
+      "messageType": "ss2.state.vector",
+      "traceId": "trace-c9e73f21-43e2-4ba1-bd59-347c8af62109",
+      "parentMessageIds": ["obs-763e4f82-31a9-4d75-b291-59a87c453e21"]
+    },
+    "payload": {
+      "stateVectorId": "sv-1aef5d23-9b71-42c8-8731-49cca137b521",
+      "objectId": "SATCAT-37849",
+      "objectName": "GOES-16",
+      "epoch": "2023-10-15T14:23:25.000Z",
+      "referenceFrame": "GCRF",
+      "position": {
+        "x": 35786.123,
+        "y": 12456.789,
+        "z": 0.123
+      },
+      "velocity": {
+        "x": -0.921,
+        "y": 2.653,
+        "z": 0.001
+      },
+      "covariance": [
+        [0.00001, 0.0, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.00001, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.00001, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.0000001, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.0000001, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.0, 0.0000001]
+      ],
+      "metadata": {
+        "source": "OPTICAL",
+        "dataQuality": "HIGH",
+        "orbitType": "GEO"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "sv-6f28d93a-42e5-48b2-a792-783c19ef4d65",
+      "timestamp": "2023-10-15T14:23:30.098Z",
+      "source": "ss2_state_estimation",
+      "messageType": "ss2.state.vector",
+      "traceId": "trace-f23a4176-5c91-47d3-b827-4e9a82f76b39",
+      "parentMessageIds": ["obs-2c51a87b-6fa9-4e83-9d47-2c7a3b6f9e21"]
+    },
+    "payload": {
+      "stateVectorId": "sv-6f28d93a-42e5-48b2-a792-783c19ef4d65",
+      "objectId": "SATCAT-48274",
+      "objectName": "UNKNOWN OBJECT",
+      "epoch": "2023-10-15T14:23:30.000Z",
+      "referenceFrame": "GCRF",
+      "position": {
+        "x": 7832.456,
+        "y": -1243.789,
+        "z": 3456.123
+      },
+      "velocity": {
+        "x": 3.456,
+        "y": 1.789,
+        "z": -5.123
+      },
+      "covariance": [
+        [0.001, 0.0, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.001, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.001, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.00001, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.00001, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.0, 0.00001]
+      ],
+      "metadata": {
+        "source": "RADAR",
+        "dataQuality": "LOW",
+        "orbitType": "MEO",
+        "notes": "Possibly debris"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "sv-21c47e8a-9f36-4d12-b578-3a91e74f8c23",
+      "timestamp": "2023-10-15T14:23:35.789Z",
+      "source": "ss2_state_estimation",
+      "messageType": "ss2.state.vector",
+      "traceId": "trace-7b32d149-6e28-4a5c-93f1-8e42d7b95c36",
+      "parentMessageIds": ["obs-4e9a713c-5d28-4b16-a937-2c81f4e95a27"]
+    },
+    "payload": {
+      "stateVectorId": "sv-21c47e8a-9f36-4d12-b578-3a91e74f8c23",
+      "objectId": "SATCAT-39084",
+      "objectName": "USA-247 (WGS F5)",
+      "epoch": "2023-10-15T14:23:35.000Z",
+      "referenceFrame": "GCRF",
+      "position": {
+        "x": 41789.123,
+        "y": -3421.789,
+        "z": 1234.456
+      },
+      "velocity": {
+        "x": 0.456,
+        "y": 3.123,
+        "z": 0.045
+      },
+      "covariance": [
+        [0.00005, 0.0, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.00005, 0.0, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.00005, 0.0, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.0000005, 0.0, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.0000005, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 0.0, 0.0000005]
+      ],
+      "metadata": {
+        "source": "COMBINED",
+        "dataQuality": "HIGH",
+        "orbitType": "GEO"
+      }
+    }
+  }
+] 

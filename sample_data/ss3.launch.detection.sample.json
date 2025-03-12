@@ -1,0 +1,426 @@
+[
+  {
+    "header": {
+      "messageId": "launch-1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+      "timestamp": "2023-10-15T20:15:23.456Z",
+      "source": "ss3_command_control",
+      "messageType": "ss3.launch.detection",
+      "traceId": "trace-f1e2d3c4-b5a6-9876-5432-1fedcba09876"
+    },
+    "payload": {
+      "detectionId": "launch-1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+      "detectionTime": "2023-10-15T20:15:23.456Z",
+      "launchSite": {
+        "name": "Kennedy Space Center",
+        "location": {
+          "latitude": 28.5729,
+          "longitude": -80.6490,
+          "country": "USA"
+        },
+        "siteId": "KSC-LC-39A"
+      },
+      "detectionConfidence": 0.98,
+      "launchVehicle": {
+        "type": "FALCON_9",
+        "operator": "SPACEX",
+        "configuration": "BLOCK_5"
+      },
+      "trajectory": {
+        "initialAzimuth": 45.2,
+        "initialElevation": 89.7,
+        "initialVelocity": 7.8,
+        "predictedOrbit": {
+          "type": "LEO",
+          "semiMajorAxis": 6778.0,
+          "eccentricity": 0.0012,
+          "inclination": 51.6,
+          "rightAscension": 115.2,
+          "argumentOfPerigee": 0.0
+        }
+      },
+      "payload": {
+        "type": "SATELLITE_DEPLOYMENT",
+        "description": "Crew Dragon with 4 astronauts",
+        "mass": 12700.0,
+        "count": 1
+      },
+      "mission": {
+        "name": "Crew-7",
+        "description": "ISS crew rotation mission",
+        "type": "HUMAN_SPACEFLIGHT",
+        "internationalDesignator": "2023-145A"
+      },
+      "detectionSource": {
+        "primarySensor": "SBIRS-GEO-4",
+        "confirmingSensors": [
+          "RADAR-ALTAIR",
+          "OPTICAL-GEODSS-DIEGO"
+        ],
+        "detectionMethod": "INFRARED"
+      },
+      "assessedThreat": {
+        "level": "NONE",
+        "confidence": 0.99,
+        "justification": "Scheduled NASA mission with flight plan filed"
+      },
+      "notifications": {
+        "agencies": [
+          "NASA",
+          "USSF",
+          "FAA"
+        ],
+        "notificationTime": "2023-10-15T20:15:25.123Z"
+      },
+      "metadata": {
+        "scheduledLaunchTime": "2023-10-15T20:15:00.000Z",
+        "weatherConditions": "NOMINAL",
+        "publiclyAnnounced": true
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "launch-2b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+      "timestamp": "2023-10-15T21:34:12.789Z",
+      "source": "ss3_command_control",
+      "messageType": "ss3.launch.detection",
+      "traceId": "trace-e2d3c4b5-a6f7-8901-2345-6fedcba09876"
+    },
+    "payload": {
+      "detectionId": "launch-2b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+      "detectionTime": "2023-10-15T21:34:12.789Z",
+      "launchSite": {
+        "name": "Plesetsk Cosmodrome",
+        "location": {
+          "latitude": 62.9271,
+          "longitude": 40.5777,
+          "country": "Russia"
+        },
+        "siteId": "PLESETSK-43/4"
+      },
+      "detectionConfidence": 0.95,
+      "launchVehicle": {
+        "type": "SOYUZ-2.1B",
+        "operator": "ROSCOSMOS",
+        "configuration": "WITH_FREGAT"
+      },
+      "trajectory": {
+        "initialAzimuth": 27.8,
+        "initialElevation": 87.3,
+        "initialVelocity": 7.2,
+        "predictedOrbit": {
+          "type": "MEO",
+          "semiMajorAxis": 19140.0,
+          "eccentricity": 0.002,
+          "inclination": 64.8,
+          "rightAscension": 215.7,
+          "argumentOfPerigee": 178.2
+        }
+      },
+      "payload": {
+        "type": "SATELLITE_DEPLOYMENT",
+        "description": "GLONASS-K2 navigation satellite",
+        "mass": 1415.0,
+        "count": 1
+      },
+      "mission": {
+        "name": "GLONASS-K2 No. 13L",
+        "description": "Navigation satellite deployment",
+        "type": "NAVIGATION",
+        "internationalDesignator": "2023-146A"
+      },
+      "detectionSource": {
+        "primarySensor": "SBIRS-GEO-2",
+        "confirmingSensors": [
+          "RADAR-COBRA-DANE"
+        ],
+        "detectionMethod": "INFRARED"
+      },
+      "assessedThreat": {
+        "level": "NONE",
+        "confidence": 0.97,
+        "justification": "Consistent with announced GLONASS constellation maintenance"
+      },
+      "notifications": {
+        "agencies": [
+          "USSF",
+          "NORAD",
+          "NATO"
+        ],
+        "notificationTime": "2023-10-15T21:34:15.456Z"
+      },
+      "metadata": {
+        "scheduledLaunchTime": "2023-10-15T21:30:00.000Z",
+        "weatherConditions": "NOMINAL",
+        "publiclyAnnounced": true
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "launch-3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+      "timestamp": "2023-10-15T22:45:37.123Z",
+      "source": "ss3_command_control",
+      "messageType": "ss3.launch.detection",
+      "traceId": "trace-d3c4b5a6-f7e8-9012-3456-7fedcba09876"
+    },
+    "payload": {
+      "detectionId": "launch-3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+      "detectionTime": "2023-10-15T22:45:37.123Z",
+      "launchSite": {
+        "name": "Jiuquan Satellite Launch Center",
+        "location": {
+          "latitude": 40.9608,
+          "longitude": 100.2914,
+          "country": "China"
+        },
+        "siteId": "JSLC-SLS-2"
+      },
+      "detectionConfidence": 0.92,
+      "launchVehicle": {
+        "type": "LONG_MARCH_2D",
+        "operator": "CNSA",
+        "configuration": "STANDARD"
+      },
+      "trajectory": {
+        "initialAzimuth": 98.3,
+        "initialElevation": 85.1,
+        "initialVelocity": 7.4,
+        "predictedOrbit": {
+          "type": "LEO",
+          "semiMajorAxis": 6928.0,
+          "eccentricity": 0.0015,
+          "inclination": 97.4,
+          "rightAscension": 189.3,
+          "argumentOfPerigee": 121.7
+        }
+      },
+      "payload": {
+        "type": "SATELLITE_DEPLOYMENT",
+        "description": "Remote sensing satellite",
+        "mass": 1200.0,
+        "count": 1
+      },
+      "mission": {
+        "name": "Yaogan-36",
+        "description": "Earth observation satellite",
+        "type": "REMOTE_SENSING",
+        "internationalDesignator": "2023-147A"
+      },
+      "detectionSource": {
+        "primarySensor": "SBIRS-GEO-3",
+        "confirmingSensors": [
+          "SBSS-1"
+        ],
+        "detectionMethod": "INFRARED"
+      },
+      "assessedThreat": {
+        "level": "LOW",
+        "confidence": 0.85,
+        "justification": "Consistent with previous Yaogan series, but limited pre-launch notification"
+      },
+      "notifications": {
+        "agencies": [
+          "USSF",
+          "NRO",
+          "NORAD"
+        ],
+        "notificationTime": "2023-10-15T22:45:40.789Z"
+      },
+      "metadata": {
+        "scheduledLaunchTime": null,
+        "weatherConditions": "NOMINAL",
+        "publiclyAnnounced": false,
+        "notes": "No advance notification provided, detected during routine monitoring"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "launch-4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
+      "timestamp": "2023-10-15T23:58:42.456Z",
+      "source": "ss3_command_control",
+      "messageType": "ss3.launch.detection",
+      "traceId": "trace-c4b5a6f7-e8d9-0123-4567-8fedcba09876"
+    },
+    "payload": {
+      "detectionId": "launch-4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
+      "detectionTime": "2023-10-15T23:58:42.456Z",
+      "launchSite": {
+        "name": "Unknown",
+        "location": {
+          "latitude": 39.6542,
+          "longitude": 124.7058,
+          "country": "North Korea",
+          "uncertaintyRadius": 15.0
+        },
+        "siteId": "UNKNOWN"
+      },
+      "detectionConfidence": 0.87,
+      "launchVehicle": {
+        "type": "UNKNOWN",
+        "operator": "DPRK",
+        "configuration": "UNKNOWN",
+        "assessedType": "HWASONG_CLASS"
+      },
+      "trajectory": {
+        "initialAzimuth": 112.5,
+        "initialElevation": 80.2,
+        "initialVelocity": 6.1,
+        "predictedOrbit": null,
+        "flightPath": {
+          "type": "BALLISTIC",
+          "apogee": 578.0,
+          "range": 450.0,
+          "impactZone": {
+            "latitude": 38.6,
+            "longitude": 134.2,
+            "uncertaintyRadius": 25.0,
+            "description": "Sea of Japan"
+          }
+        }
+      },
+      "payload": {
+        "type": "UNKNOWN",
+        "description": "Possible test payload",
+        "mass": null,
+        "count": 1
+      },
+      "mission": {
+        "name": "UNKNOWN",
+        "description": "Suspected ballistic missile test",
+        "type": "MISSILE_TEST",
+        "internationalDesignator": null
+      },
+      "detectionSource": {
+        "primarySensor": "SBIRS-GEO-1",
+        "confirmingSensors": [
+          "RADAR-COBRA-DANE",
+          "AEGIS-BMD-PACIFIC"
+        ],
+        "detectionMethod": "INFRARED"
+      },
+      "assessedThreat": {
+        "level": "MEDIUM",
+        "confidence": 0.82,
+        "justification": "Unannounced launch from DPRK with ballistic trajectory",
+        "recommendations": [
+          "Increase monitoring of DPRK launch facilities",
+          "Alert regional defense assets"
+        ]
+      },
+      "notifications": {
+        "agencies": [
+          "USSF",
+          "USSTRATCOM",
+          "INDOPACOM",
+          "STATE_DEPT",
+          "JAPAN_MOD",
+          "ROK_MOD"
+        ],
+        "notificationTime": "2023-10-15T23:58:45.123Z",
+        "alertLevel": "SIGNIFICANT"
+      },
+      "metadata": {
+        "scheduledLaunchTime": null,
+        "weatherConditions": "LIGHT_RAIN",
+        "publiclyAnnounced": false,
+        "notes": "No advance notification, consistent with previous DPRK missile tests"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "launch-5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t",
+      "timestamp": "2023-10-16T01:23:15.789Z",
+      "source": "ss3_command_control",
+      "messageType": "ss3.launch.detection",
+      "traceId": "trace-b5a6f7e8-d9c0-1234-5678-9fedcba09876"
+    },
+    "payload": {
+      "detectionId": "launch-5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t",
+      "detectionTime": "2023-10-16T01:23:15.789Z",
+      "launchSite": {
+        "name": "Unknown",
+        "location": {
+          "latitude": 35.2312,
+          "longitude": 53.9187,
+          "country": "Iran",
+          "uncertaintyRadius": 20.0
+        },
+        "siteId": "UNKNOWN-SEMNAN-REGION"
+      },
+      "detectionConfidence": 0.76,
+      "launchVehicle": {
+        "type": "UNKNOWN",
+        "operator": "IRAN",
+        "configuration": "UNKNOWN",
+        "assessedType": "SIMORGH_CLASS"
+      },
+      "trajectory": {
+        "initialAzimuth": 178.3,
+        "initialElevation": 86.7,
+        "initialVelocity": 5.8,
+        "predictedOrbit": {
+          "type": "LEO",
+          "semiMajorAxis": 6678.0,
+          "eccentricity": 0.0045,
+          "inclination": 55.2,
+          "rightAscension": 287.4,
+          "argumentOfPerigee": 45.3,
+          "confidenceLevel": "LOW"
+        }
+      },
+      "payload": {
+        "type": "UNKNOWN",
+        "description": "Possible small satellite",
+        "mass": null,
+        "count": 1
+      },
+      "mission": {
+        "name": "UNKNOWN",
+        "description": "Possible satellite launch attempt",
+        "type": "SATELLITE_DEPLOYMENT",
+        "internationalDesignator": null
+      },
+      "detectionSource": {
+        "primarySensor": "SBIRS-GEO-5",
+        "confirmingSensors": [],
+        "detectionMethod": "INFRARED",
+        "detectionQuality": "MODERATE"
+      },
+      "assessedThreat": {
+        "level": "LOW",
+        "confidence": 0.68,
+        "justification": "Consistent with previous Iranian space launch attempts",
+        "recommendations": [
+          "Continue monitoring for orbital insertion confirmation",
+          "Assess payload capabilities if orbit achieved"
+        ]
+      },
+      "notifications": {
+        "agencies": [
+          "USSF",
+          "CENTCOM",
+          "STATE_DEPT"
+        ],
+        "notificationTime": "2023-10-16T01:23:20.456Z",
+        "alertLevel": "ROUTINE"
+      },
+      "metadata": {
+        "scheduledLaunchTime": null,
+        "weatherConditions": "CLEAR",
+        "publiclyAnnounced": false,
+        "notes": "No advance notification, limited sensor coverage of launch site"
+      },
+      "subsequentEvents": [
+        {
+          "eventType": "LAUNCH_FAILURE",
+          "eventTime": "2023-10-16T01:25:45.123Z",
+          "description": "Anomaly detected during second stage burn, no orbital insertion achieved",
+          "confidence": 0.82
+        }
+      ]
+    }
+  }
+] 
