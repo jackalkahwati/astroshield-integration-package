@@ -87,6 +87,12 @@
         "anomalyScore": 0.23,
         "intentAssessment": "NORMAL_OPERATIONS",
         "notes": "Regular station keeping maneuver for constellation maintenance"
+      },
+      "targetObject": {
+        "objectId": "SATCAT-43013",
+        "noradId": 43013,
+        "objectName": "STARLINK-1047",
+        "stateVectorId": "sv-7bc9e416-23a1-49d9-98d5-463abf1e5924"
       }
     }
   },
@@ -158,6 +164,12 @@
         "anomalyScore": 0.76,
         "intentAssessment": "POTENTIAL_HOSTILE",
         "notes": "Unexpected signature change not aligned with historical behavior of this spacecraft"
+      },
+      "targetObject": {
+        "objectId": "SATCAT-39084",
+        "noradId": 39084,
+        "objectName": "USA-247 (WGS F5)",
+        "stateVectorId": "sv-21c47e8a-9f36-4d12-b578-3a91e74f8c23"
       }
     }
   },
@@ -226,6 +238,12 @@
         "intentAssessment": "HOSTILE",
         "threatLevel": "HIGH",
         "notes": "Object attempting to appear as debris while demonstrating controlled behavior"
+      },
+      "targetObject": {
+        "objectId": "SATCAT-48274",
+        "noradId": 48274,
+        "objectName": "UNKNOWN OBJECT",
+        "stateVectorId": "sv-6f28d93a-42e5-48b2-a792-783c19ef4d65"
       }
     }
   },
@@ -285,6 +303,12 @@
         "anomalyScore": 0.68,
         "intentAssessment": "SUSPICIOUS",
         "notes": "Weather satellite performed activity during coverage gap. Post-gap analysis suggests possible deployment of secondary object."
+      },
+      "targetObject": {
+        "objectId": "SATCAT-37849",
+        "noradId": 37849,
+        "objectName": "GOES-16",
+        "stateVectorId": "sv-1aef5d23-9b71-42c8-8731-49cca137b521"
       },
       "relatedObjects": [
         {

@@ -15,7 +15,8 @@
         "latitude": 9.3977,
         "longitude": 167.4792,
         "altitude": 24.0,
-        "site": "Kwajalein Atoll"
+        "site": "Kwajalein Atoll",
+        "noradId": 12345
       },
       "status": "OPERATIONAL",
       "lastContactTime": "2023-10-15T14:59:55.123Z",
@@ -73,7 +74,8 @@
         "latitude": -7.3195,
         "longitude": 72.4229,
         "altitude": 3.0,
-        "site": "Diego Garcia"
+        "site": "Diego Garcia",
+        "noradId": 12346
       },
       "status": "OPERATIONAL",
       "lastContactTime": "2023-10-15T14:59:58.456Z",
@@ -199,7 +201,8 @@
         "latitude": 51.8806,
         "longitude": -174.0911,
         "altitude": 37.0,
-        "site": "Shemya Island, Alaska"
+        "site": "Shemya Island, Alaska",
+        "noradId": 12347
       },
       "status": "MAINTENANCE",
       "lastContactTime": "2023-10-15T14:30:00.000Z",
@@ -262,7 +265,8 @@
         "latitude": -30.7224,
         "longitude": 21.4111,
         "altitude": 1054.0,
-        "site": "Karoo, South Africa"
+        "site": "Karoo, South Africa",
+        "noradId": 12348
       },
       "status": "OFFLINE",
       "lastContactTime": "2023-10-15T14:45:12.345Z",

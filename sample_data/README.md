@@ -1,6 +1,69 @@
 # AstroShield Sample Data
 
-This directory contains sample data files that represent the various message types used in the AstroShield platform. These samples are provided to help developers understand the data structure, test their integration code, and validate their implementations without requiring access to the live data streams.
+This directory contains sample data for testing AstroShield integration. Each file represents a different message type from the AstroShield Kafka topics.
+
+## Object Identification Standard
+
+Throughout the AstroShield platform, space objects are identified using two standard identifiers:
+
+1. **objectId** - String identifier with format `SATCAT-{number}` (e.g., `SATCAT-25544`), allowing for custom prefixes for different catalogs.
+2. **noradId** - Integer value representing the NORAD Catalog Number (e.g., `25544`), directly compatible with existing satellite tracking systems.
+
+Both identifiers are included in all messages that reference space objects, ensuring compatibility with various systems and providing a consistent way to cross-reference objects across different data sources.
+
+## Files Included
+
+### State Vectors (`ss2.data.state-vector.sample.json`)
+Contains state vector data for multiple objects, including position, velocity, and covariance information. Enhanced with track information, correlation scores, state estimation methods, and catalog references. Includes examples of both well-tracked objects and uncorrelated tracks (UCTs).
+
+### Conjunction Events (`ss5.conjunction.events.sample.json`)
+Details potential conjunction events between space objects, including miss distance, probability of collision, and risk assessments.
+
+### CCDM Detections (`ss4.ccdm.detection.sample.json`)
+Contains Command, Control, and Decision Making (CCDM) detection events, identifying behaviors such as maneuvers, signal emissions, or anomalous activities.
+
+### Response Recommendations (`ss6.response-recommendation.sample.json`) 
+Provides actionable response recommendations for both on-orbit threats and launch events, including detailed course of action recommendations, alternative options, and tactics, techniques, and procedures (TTPs). Replaces the legacy threat assessment format with the more comprehensive response recommendation format used by Subsystem 6.
+
+### Sensor Heartbeats (`ss0.sensor.heartbeat.sample.json`)
+Regular status updates from various sensors in the network, including health metrics, operational status, and coverage information.
+
+### Launch Detections (`ss0.launch.detection.sample.json`)
+Information about detected launch events, including launch site, vehicle type, trajectory, and predicted target orbit.
+
+## Message Structure
+
+All messages follow a standardized format with a header section and a payload section. The header contains metadata like messageId, timestamp, source, messageType, traceId, and parentMessageIds for traceability. The payload contains the actual data specific to the message type.
+
+## Usage
+
+These sample files can be used for:
+- Testing integration with the AstroShield Kafka streams
+- Developing message processing applications
+- Understanding the data structure and content
+- Creating mock services for development and testing
+
+## Data Quality Notes
+
+The sample data is representative of real-world scenarios but has been generated for demonstration purposes. Specific values, object identifiers, and timestamps are fictional but structured in a way that mimics operational data.
+
+## Subsystem Alignments
+
+The sample data files are aligned with specific AstroShield subsystems:
+
+### Subsystem 2 - State Estimation
+The state vector sample (`ss2.data.state-vector.sample.json`) demonstrates Subsystem 2's capabilities for:
+- Maintaining an internal catalog of active objects
+- Correlating observations against known objects
+- Processing uncorrelated tracks (UCTs) to identify new objects
+- Serving current state information for any Resident Space Object
+
+### Subsystem 6 - Response Recommendation
+The response recommendation sample (`ss6.response-recommendation.sample.json`) demonstrates Subsystem 6's capabilities for:
+- Providing timely, continuously updated recommendations
+- Offering prioritized lists of courses of action (COAs)
+- Including associated tactics, techniques, and procedures (TTPs)
+- Processing both launch events and on-orbit threat detections
 
 ## Overview
 
@@ -23,10 +86,10 @@ The header includes fields such as:
 |------|-------------|-----------|--------|
 | `ss0.sensor.heartbeat.sample.json` | Sensor status and health information | Data Ingestion (SS0) | `schemas/ss0.sensor.heartbeat.schema.json` |
 | `ss2.data.state-vector.sample.json` | Space object state vectors with position and velocity | State Estimation (SS2) | `schemas/ss2.data.state-vector.schema.json` |
-| `ss3.launch.detection.sample.json` | Launch detection events with trajectory information | Command & Control (SS3) | `schemas/ss3.launch.detection.schema.json` |
+| `ss0.launch.detection.sample.json` | Launch detection events with trajectory information | Data Ingestion (SS0) | `schemas/ss0.launch.detection.schema.json` |
 | `ss4.ccdm.detection.sample.json` | CCDM (Camouflage, Concealment, Deception, Maneuvering) detections | CCDM Detection (SS4) | `schemas/ss4.ccdm.detection.schema.json` |
 | `ss5.conjunction.events.sample.json` | Space object conjunction (close approach) events | Hostility Monitoring (SS5) | `schemas/ss5.conjunction.events.schema.json` |
-| `ss6.threat.assessment.sample.json` | Threat assessments based on detected events | Threat Assessment (SS6) | `schemas/ss6.threat.assessment.schema.json` |
+| `ss6.response-recommendation.sample.json` | Response recommendations for various threats | Response Recommendation (SS6) | `schemas/ss6.response-recommendation.schema.json` |
 
 ## Message Traceability
 
@@ -35,7 +98,7 @@ The sample data demonstrates the message traceability feature of AstroShield. Yo
 1. The `traceId` field, which remains constant throughout a processing chain
 2. The `parentMessageIds` field, which references the source messages that led to the current message
 
-For example, a threat assessment message in `ss6.threat.assessment.sample.json` may reference a CCDM detection message from `ss4.ccdm.detection.sample.json` in its `parentMessageIds` field.
+For example, a response recommendation message in `ss6.response-recommendation.sample.json` references a CCDM detection message from `ss4.ccdm.detection.sample.json` in its `parentMessageIds` field.
 
 ## Using the Sample Data
 
@@ -111,10 +174,10 @@ jsonschema.validate(my_message, schema)
 The sample data files contain related messages that demonstrate the flow of information through the AstroShield system:
 
 1. Sensor heartbeats (`ss0.sensor.heartbeat.sample.json`) provide status information about the sensors that collect raw data
-2. State vectors (`ss2.data.state-vector.sample.json`) represent the processed positional data of space objects
+2. State vectors (`ss2.data.state-vector.sample.json`) represent the processed positional data of space objects, including UCT processing results
 3. These state vectors are used to detect conjunctions (`ss5.conjunction.events.sample.json`) and CCDM activities (`ss4.ccdm.detection.sample.json`)
-4. Launch detections (`ss3.launch.detection.sample.json`) identify new objects entering space
-5. All of these events feed into threat assessments (`ss6.threat.assessment.sample.json`) which provide actionable intelligence
+4. Launch detections (`ss0.launch.detection.sample.json`) identify new objects entering space
+5. All of these events feed into response recommendations (`ss6.response-recommendation.sample.json`) which provide actionable intelligence and courses of action
 
 ## Notes on Data Quality
 

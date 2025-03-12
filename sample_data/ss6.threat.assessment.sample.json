@@ -95,7 +95,8 @@
         "analystId": "SYSTEM",
         "reviewStatus": "PENDING_HUMAN_REVIEW",
         "classification": "SECRET"
-      }
+      },
+      "noradId": 48274
     }
   },
   {
@@ -184,7 +185,8 @@
         "reviewStatus": "HUMAN_REVIEWED",
         "reviewerId": "ANALYST-JD42",
         "classification": "UNCLASSIFIED"
-      }
+      },
+      "noradId": 43013
     }
   },
   {
@@ -283,7 +285,8 @@
         "analystId": "SYSTEM",
         "reviewStatus": "PENDING_HUMAN_REVIEW",
         "classification": "TOP_SECRET"
-      }
+      },
+      "noradId": 39084
     }
   },
   {
@@ -376,7 +379,8 @@
         "analystId": "SYSTEM",
         "reviewStatus": "PENDING_HUMAN_REVIEW",
         "classification": "SECRET"
-      }
+      },
+      "noradId": 37849
     }
   },
   {
@@ -488,7 +492,8 @@
         "reviewerId": "SUPERVISOR-MK19",
         "classification": "TOP_SECRET",
         "escalationLevel": "NATIONAL_COMMAND_AUTHORITY"
-      }
+      },
+      "noradId": 48274
     }
   }
 ] 
