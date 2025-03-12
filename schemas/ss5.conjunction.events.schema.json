@@ -1,0 +1,336 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://astroshield.com/schemas/ss5.conjunction.events.schema.json",
+  "title": "Spacecraft Conjunction Event",
+  "description": "Schema for conjunction event messages between spacecraft or space objects",
+  "type": "object",
+  "required": ["header", "payload"],
+  "properties": {
+    "header": {
+      "type": "object",
+      "description": "Message header containing metadata",
+      "required": ["messageId", "timestamp", "source", "messageType"],
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "Unique identifier for the message",
+          "format": "uuid"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Time when the message was generated",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "description": "System or component that generated the message"
+        },
+        "messageType": {
+          "type": "string",
+          "description": "Type of message",
+          "enum": ["conjunction.event"]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority level of the message",
+          "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Message payload containing conjunction event data",
+      "required": ["conjunctionId", "timeOfClosestApproach", "missDistance", "probability", "primaryObject", "secondaryObject"],
+      "properties": {
+        "conjunctionId": {
+          "type": "string",
+          "description": "Unique identifier for the conjunction event"
+        },
+        "timeOfClosestApproach": {
+          "type": "string",
+          "description": "Time of closest approach between the objects",
+          "format": "date-time"
+        },
+        "missDistance": {
+          "type": "object",
+          "description": "Miss distance between the objects",
+          "required": ["value", "unit"],
+          "properties": {
+            "value": {
+              "type": "number",
+              "description": "Value of the miss distance"
+            },
+            "unit": {
+              "type": "string",
+              "description": "Unit of the miss distance",
+              "enum": ["meters", "kilometers"]
+            }
+          }
+        },
+        "probability": {
+          "type": "number",
+          "description": "Probability of collision",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "primaryObject": {
+          "type": "object",
+          "description": "Information about the primary object in the conjunction",
+          "required": ["id", "type"],
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Identifier of the primary object"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the primary object",
+              "enum": ["SPACECRAFT", "DEBRIS", "ROCKET_BODY", "UNKNOWN"]
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the primary object"
+            },
+            "noradId": {
+              "type": "integer",
+              "description": "NORAD catalog ID of the primary object"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Owner or operator of the primary object"
+            },
+            "size": {
+              "type": "object",
+              "description": "Size information of the primary object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "description": "Value of the size"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of the size",
+                  "enum": ["meters", "centimeters"]
+                }
+              }
+            }
+          }
+        },
+        "secondaryObject": {
+          "type": "object",
+          "description": "Information about the secondary object in the conjunction",
+          "required": ["id", "type"],
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Identifier of the secondary object"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the secondary object",
+              "enum": ["SPACECRAFT", "DEBRIS", "ROCKET_BODY", "UNKNOWN"]
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the secondary object"
+            },
+            "noradId": {
+              "type": "integer",
+              "description": "NORAD catalog ID of the secondary object"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Owner or operator of the secondary object"
+            },
+            "size": {
+              "type": "object",
+              "description": "Size information of the secondary object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "description": "Value of the size"
+                },
+                "unit": {
+                  "type": "string",
+                  "description": "Unit of the size",
+                  "enum": ["meters", "centimeters"]
+                }
+              }
+            }
+          }
+        },
+        "relativeVelocity": {
+          "type": "object",
+          "description": "Relative velocity between the objects at closest approach",
+          "required": ["value", "unit"],
+          "properties": {
+            "value": {
+              "type": "number",
+              "description": "Value of the relative velocity"
+            },
+            "unit": {
+              "type": "string",
+              "description": "Unit of the relative velocity",
+              "enum": ["m/s", "km/s"]
+            }
+          }
+        },
+        "screeningPeriod": {
+          "type": "object",
+          "description": "Time period for which the conjunction was screened",
+          "properties": {
+            "start": {
+              "type": "string",
+              "description": "Start time of the screening period",
+              "format": "date-time"
+            },
+            "end": {
+              "type": "string",
+              "description": "End time of the screening period",
+              "format": "date-time"
+            }
+          }
+        },
+        "riskAssessment": {
+          "type": "object",
+          "description": "Risk assessment for the conjunction event",
+          "properties": {
+            "level": {
+              "type": "string",
+              "description": "Risk level of the conjunction",
+              "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+            },
+            "mitigationRequired": {
+              "type": "boolean",
+              "description": "Whether mitigation action is required"
+            },
+            "recommendedActions": {
+              "type": "array",
+              "description": "Recommended actions to mitigate the risk",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "uncertainties": {
+          "type": "object",
+          "description": "Uncertainties in the conjunction prediction",
+          "properties": {
+            "inTrack": {
+              "type": "number",
+              "description": "In-track uncertainty in meters"
+            },
+            "crossTrack": {
+              "type": "number",
+              "description": "Cross-track uncertainty in meters"
+            },
+            "radial": {
+              "type": "number",
+              "description": "Radial uncertainty in meters"
+            },
+            "time": {
+              "type": "number",
+              "description": "Time uncertainty in seconds"
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional metadata about the conjunction event",
+          "properties": {
+            "analysisMethod": {
+              "type": "string",
+              "description": "Method used for conjunction analysis"
+            },
+            "confidenceLevel": {
+              "type": "number",
+              "description": "Confidence level of the conjunction prediction",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "dataSource": {
+              "type": "string",
+              "description": "Source of the orbital data used for analysis"
+            },
+            "tags": {
+              "type": "array",
+              "description": "Tags associated with this conjunction event",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "header": {
+        "messageId": "550e8400-e29b-41d4-a716-446655440001",
+        "timestamp": "2023-05-01T12:00:00Z",
+        "source": "conjunction-detection-system",
+        "messageType": "conjunction.event",
+        "priority": "HIGH"
+      },
+      "payload": {
+        "conjunctionId": "CONJ-2023-05-01-001",
+        "timeOfClosestApproach": "2023-05-02T15:30:00Z",
+        "missDistance": {
+          "value": 125.5,
+          "unit": "meters"
+        },
+        "probability": 0.0015,
+        "primaryObject": {
+          "id": "SAT-123",
+          "type": "SPACECRAFT",
+          "name": "AstroShield Sentinel-1",
+          "noradId": 45123,
+          "owner": "AstroShield Inc.",
+          "size": {
+            "value": 3.5,
+            "unit": "meters"
+          }
+        },
+        "secondaryObject": {
+          "id": "DEBRIS-456",
+          "type": "DEBRIS",
+          "noradId": 36789,
+          "size": {
+            "value": 10,
+            "unit": "centimeters"
+          }
+        },
+        "relativeVelocity": {
+          "value": 12.3,
+          "unit": "km/s"
+        },
+        "screeningPeriod": {
+          "start": "2023-05-01T00:00:00Z",
+          "end": "2023-05-07T00:00:00Z"
+        },
+        "riskAssessment": {
+          "level": "MEDIUM",
+          "mitigationRequired": true,
+          "recommendedActions": [
+            "MONITOR_CLOSELY",
+            "PREPARE_MANEUVER_PLAN"
+          ]
+        },
+        "uncertainties": {
+          "inTrack": 25.3,
+          "crossTrack": 15.7,
+          "radial": 10.2,
+          "time": 1.5
+        },
+        "metadata": {
+          "analysisMethod": "PROBABILITY_BASED",
+          "confidenceLevel": 0.95,
+          "dataSource": "SPACE-TRACK",
+          "tags": ["high-velocity", "debris-risk"]
+        }
+      }
+    }
+  ]
+} 

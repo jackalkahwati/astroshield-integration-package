@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sensor Heartbeat Message",
+  "description": "Schema for the ss0.sensor.heartbeat Kafka topic",
+  "type": "object",
+  "required": ["header", "payload"],
+  "properties": {
+    "header": {
+      "type": "object",
+      "required": [
+        "messageId",
+        "messageTime",
+        "messageVersion",
+        "subsystem",
+        "dataProvider",
+        "dataType",
+        "dataVersion"
+      ],
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "UUID to uniquely identify the message"
+        },
+        "messageTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of when the message occurred"
+        },
+        "messageVersion": {
+          "type": "string",
+          "description": "Message header schema version"
+        },
+        "subsystem": {
+          "type": "string",
+          "description": "Subsystem that produced the message",
+          "enum": ["ss0"]
+        },
+        "dataProvider": {
+          "type": "string",
+          "description": "Provider or component within the subsystem"
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Payload type or topic name",
+          "enum": ["ss0.sensor.heartbeat"]
+        },
+        "dataVersion": {
+          "type": "string",
+          "description": "Payload schema version",
+          "enum": ["0.1.0", "0.2.0"]
+        },
+        "customProperties": {
+          "type": "object",
+          "description": "Optional additional properties",
+          "additionalProperties": true
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "timeHeartbeat",
+        "idSensor",
+        "status"
+      ],
+      "properties": {
+        "timeHeartbeat": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of the heartbeat"
+        },
+        "idSensor": {
+          "type": "string",
+          "description": "Unique identifier of the sensor"
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the sensor",
+          "enum": ["OPERATIONAL", "DEGRADED", "OFFLINE", "MAINTENANCE", "UNKNOWN"]
+        },
+        "eo": {
+          "type": "object",
+          "description": "Electro-optical sensor specific information",
+          "properties": {
+            "sunlit": {
+              "type": "boolean",
+              "description": "Whether the sensor is in sunlight"
+            },
+            "overcastRatio": {
+              "type": "number",
+              "description": "Ratio of cloud cover (0.0 to 1.0)",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description or additional information"
+        }
+      }
+    }
+  }
+} 

@@ -1,0 +1,1184 @@
+openapi: 3.0.0
+info:
+  title: AstroShield API
+  description: |
+    API for the AstroShield platform, providing access to spacecraft data, conjunction analysis, 
+    cyber threat detection, and stability analysis.
+  version: 1.1.0
+  contact:
+    name: AstroShield API Support
+    email: api-support@astroshield.com
+    url: https://developers.astroshield.com
+servers:
+  - url: https://api.astroshield.com
+    description: Production server
+  - url: https://api-staging.astroshield.com
+    description: Staging server
+  - url: http://localhost:8000
+    description: Development server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token obtained from the /auth/token endpoint
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for service-to-service communication
+  
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              example: RESOURCE_NOT_FOUND
+            message:
+              type: string
+              example: The requested resource was not found
+            details:
+              type: object
+              additionalProperties: true
+              example:
+                resource_id: "123"
+                resource_type: "spacecraft"
+    
+    Spacecraft:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: ISS
+        norad_id:
+          type: integer
+          example: 25544
+        status:
+          type: string
+          enum: [active, inactive]
+          example: active
+        orbit_type:
+          type: string
+          enum: [LEO, MEO, GEO, HEO]
+          example: LEO
+        launch_date:
+          type: string
+          format: date-time
+          example: "1998-11-20T06:40:00Z"
+        last_updated:
+          type: string
+          format: date-time
+          example: "2023-05-01T12:00:00Z"
+        orbital_parameters:
+          type: object
+          properties:
+            semi_major_axis:
+              type: number
+              example: 6783.5
+            eccentricity:
+              type: number
+              example: 0.0001
+            inclination:
+              type: number
+              example: 51.64
+            raan:
+              type: number
+              example: 247.89
+            argument_of_perigee:
+              type: number
+              example: 283.9
+            mean_anomaly:
+              type: number
+              example: 120.87
+            epoch:
+              type: string
+              format: date-time
+              example: "2023-05-01T12:00:00Z"
+        physical_parameters:
+          type: object
+          properties:
+            mass:
+              type: number
+              example: 420000
+            length:
+              type: number
+              example: 73
+            width:
+              type: number
+              example: 109
+            height:
+              type: number
+              example: 27.5
+            cross_section:
+              type: number
+              example: 2477.5
+    
+    SpacecraftList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Spacecraft'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              example: 1
+            limit:
+              type: integer
+              example: 20
+            total:
+              type: integer
+              example: 2
+    
+    Conjunction:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        primary_object:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            name:
+              type: string
+              example: ISS
+            norad_id:
+              type: integer
+              example: 25544
+            state_vector:
+              type: object
+              properties:
+                position:
+                  type: array
+                  items:
+                    type: number
+                  example: [6500, 1000, 100]
+                velocity:
+                  type: array
+                  items:
+                    type: number
+                  example: [0.1, 7.5, 0.5]
+                epoch:
+                  type: string
+                  format: date-time
+                  example: "2023-05-10T15:30:00Z"
+        secondary_object:
+          type: object
+          properties:
+            id:
+              type: integer
+              nullable: true
+              example: null
+            name:
+              type: string
+              example: Debris
+            norad_id:
+              type: integer
+              example: 45678
+            state_vector:
+              type: object
+              properties:
+                position:
+                  type: array
+                  items:
+                    type: number
+                  example: [6500.5, 1000.1, 100.2]
+                velocity:
+                  type: array
+                  items:
+                    type: number
+                  example: [0.2, 7.6, 0.6]
+                epoch:
+                  type: string
+                  format: date-time
+                  example: "2023-05-10T15:30:00Z"
+        tca:
+          type: string
+          format: date-time
+          example: "2023-05-10T15:30:00Z"
+        miss_distance:
+          type: number
+          example: 0.5
+        collision_probability:
+          type: number
+          example: 0.00001
+        relative_velocity:
+          type: number
+          example: 10.5
+        covariance_primary:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+          example: [
+            [0.01, 0.001, 0.0001],
+            [0.001, 0.01, 0.0001],
+            [0.0001, 0.0001, 0.01]
+          ]
+        covariance_secondary:
+          type: array
+          items:
+            type: array
+            items:
+              type: number
+          example: [
+            [0.1, 0.01, 0.001],
+            [0.01, 0.1, 0.001],
+            [0.001, 0.001, 0.1]
+          ]
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-05-01T12:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-05-01T12:00:00Z"
+    
+    ConjunctionList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conjunction'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              example: 1
+            limit:
+              type: integer
+              example: 20
+            total:
+              type: integer
+              example: 1
+    
+    CyberThreat:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        spacecraft_id:
+          type: integer
+          example: 1
+        type:
+          type: string
+          example: jamming
+        severity:
+          type: string
+          enum: [low, medium, high, critical]
+          example: high
+        confidence:
+          type: number
+          example: 0.85
+        start_time:
+          type: string
+          format: date-time
+          example: "2023-05-01T10:00:00Z"
+        end_time:
+          type: string
+          format: date-time
+          example: "2023-05-01T10:30:00Z"
+        description:
+          type: string
+          example: Suspected jamming attack on communication subsystem
+        affected_subsystems:
+          type: array
+          items:
+            type: string
+          example: ["communications"]
+        mitigation_status:
+          type: string
+          enum: [detected, investigating, mitigating, resolved]
+          example: resolved
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-05-01T10:05:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-05-01T11:00:00Z"
+    
+    CyberThreatList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CyberThreat'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              example: 1
+            limit:
+              type: integer
+              example: 20
+            total:
+              type: integer
+              example: 1
+    
+    StabilityData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        spacecraft_id:
+          type: integer
+          example: 1
+        timestamp:
+          type: string
+          format: date-time
+          example: "2023-05-01T12:00:00Z"
+        stability_index:
+          type: number
+          example: 0.95
+        anomaly_score:
+          type: number
+          example: 0.02
+        subsystem_metrics:
+          type: object
+          properties:
+            power:
+              type: object
+              properties:
+                stability:
+                  type: number
+                  example: 0.98
+                anomaly_score:
+                  type: number
+                  example: 0.01
+            thermal:
+              type: object
+              properties:
+                stability:
+                  type: number
+                  example: 0.97
+                anomaly_score:
+                  type: number
+                  example: 0.02
+            attitude:
+              type: object
+              properties:
+                stability:
+                  type: number
+                  example: 0.94
+                anomaly_score:
+                  type: number
+                  example: 0.03
+            communications:
+              type: object
+              properties:
+                stability:
+                  type: number
+                  example: 0.99
+                anomaly_score:
+                  type: number
+                  example: 0.01
+    
+    StabilityDataList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StabilityData'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              example: 1
+            limit:
+              type: integer
+              example: 20
+            total:
+              type: integer
+              example: 1
+    
+    TelemetryData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        spacecraft_id:
+          type: integer
+          example: 1
+        timestamp:
+          type: string
+          format: date-time
+          example: "2023-05-01T12:00:00Z"
+        subsystem:
+          type: string
+          enum: [power, thermal, attitude, communications]
+          example: power
+        metrics:
+          type: object
+          additionalProperties: true
+          example:
+            battery_voltage: 28.5
+            battery_current: 2.1
+            battery_temperature: 25.3
+            solar_array_voltage: 32.1
+            solar_array_current: 5.2
+    
+    TelemetryDataList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TelemetryData'
+        meta:
+          type: object
+          properties:
+            page:
+              type: integer
+              example: 1
+            limit:
+              type: integer
+              example: 20
+            total:
+              type: integer
+              example: 2
+    
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        url:
+          type: string
+          format: uri
+          example: https://example.com/webhook
+        events:
+          type: array
+          items:
+            type: string
+          example: ["conjunction.detected", "cyber_threat.detected"]
+        created_at:
+          type: string
+          format: date-time
+          example: "2023-05-01T12:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2023-05-01T12:00:00Z"
+    
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...
+        token_type:
+          type: string
+          example: bearer
+        expires_in:
+          type: integer
+          example: 3600
+    
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: healthy
+        version:
+          type: string
+          example: 1.0.0
+        timestamp:
+          type: string
+          format: date-time
+          example: "2023-05-01T12:00:00Z"
+
+paths:
+  /health:
+    get:
+      summary: Get API health status
+      description: Returns the current health status of the API
+      operationId: getHealth
+      responses:
+        '200':
+          description: API health information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  
+  /auth/token:
+    post:
+      summary: Obtain authentication token
+      description: Authenticates a user and returns a JWT token
+      operationId: getToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  example: password123
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Authentication failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /api/v1/spacecraft:
+    get:
+      summary: List spacecraft
+      description: Returns a list of spacecraft with pagination
+      operationId: listSpacecraft
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - name: page
+          in: query
+          description: Page number
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Items per page
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+        - name: status
+          in: query
+          description: Filter by status
+          schema:
+            type: string
+            enum: [active, inactive, all]
+      responses:
+        '200':
+          description: List of spacecraft
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpacecraftList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    
+    post:
+      summary: Create spacecraft
+      description: Creates a new spacecraft
+      operationId: createSpacecraft
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - norad_id
+                - status
+                - orbit_type
+              properties:
+                name:
+                  type: string
+                  example: New Satellite
+                norad_id:
+                  type: integer
+                  example: 12345
+                status:
+                  type: string
+                  enum: [active, inactive]
+                  example: active
+                orbit_type:
+                  type: string
+                  enum: [LEO, MEO, GEO, HEO]
+                  example: GEO
+                launch_date:
+                  type: string
+                  format: date-time
+                  example: "2023-01-01T00:00:00Z"
+                orbital_parameters:
+                  type: object
+                  properties:
+                    semi_major_axis:
+                      type: number
+                      example: 42164
+                    eccentricity:
+                      type: number
+                      example: 0.0002
+                    inclination:
+                      type: number
+                      example: 0.1
+                    raan:
+                      type: number
+                      example: 95.5
+                    argument_of_perigee:
+                      type: number
+                      example: 270
+                    mean_anomaly:
+                      type: number
+                      example: 0
+                    epoch:
+                      type: string
+                      format: date-time
+                      example: "2023-05-01T12:00:00Z"
+                physical_parameters:
+                  type: object
+                  properties:
+                    mass:
+                      type: number
+                      example: 5000
+                    length:
+                      type: number
+                      example: 15
+                    width:
+                      type: number
+                      example: 3
+                    height:
+                      type: number
+                      example: 3
+                    cross_section:
+                      type: number
+                      example: 45
+      responses:
+        '201':
+          description: Spacecraft created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spacecraft'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /api/v1/spacecraft/{spacecraft_id}:
+    get:
+      summary: Get spacecraft details
+      description: Returns detailed information about a specific spacecraft
+      operationId: getSpacecraft
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - name: spacecraft_id
+          in: path
+          required: true
+          description: Unique identifier of the spacecraft
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Spacecraft details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spacecraft'
+        '404':
+          description: Spacecraft not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    
+    put:
+      summary: Update spacecraft
+      description: Updates an existing spacecraft
+      operationId: updateSpacecraft
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: spacecraft_id
+          in: path
+          required: true
+          description: Unique identifier of the spacecraft
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: string
+                  enum: [active, inactive]
+                orbit_type:
+                  type: string
+                  enum: [LEO, MEO, GEO, HEO]
+                orbital_parameters:
+                  type: object
+                  properties:
+                    semi_major_axis:
+                      type: number
+                    eccentricity:
+                      type: number
+                    inclination:
+                      type: number
+                    raan:
+                      type: number
+                    argument_of_perigee:
+                      type: number
+                    mean_anomaly:
+                      type: number
+                    epoch:
+                      type: string
+                      format: date-time
+                physical_parameters:
+                  type: object
+                  properties:
+                    mass:
+                      type: number
+                    length:
+                      type: number
+                    width:
+                      type: number
+                    height:
+                      type: number
+                    cross_section:
+                      type: number
+      responses:
+        '200':
+          description: Spacecraft updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spacecraft'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Spacecraft not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    
+    delete:
+      summary: Delete spacecraft
+      description: Deletes an existing spacecraft
+      operationId: deleteSpacecraft
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: spacecraft_id
+          in: path
+          required: true
+          description: Unique identifier of the spacecraft
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Spacecraft deleted
+        '404':
+          description: Spacecraft not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /api/v1/conjunctions:
+    get:
+      summary: Get conjunction events
+      description: Returns a list of conjunction events with pagination
+      operationId: getConjunctions
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - name: spacecraft_id
+          in: query
+          description: Filter by spacecraft ID
+          schema:
+            type: integer
+        - name: start_time
+          in: query
+          description: Start time in ISO 8601 format
+          schema:
+            type: string
+            format: date-time
+        - name: end_time
+          in: query
+          description: End time in ISO 8601 format
+          schema:
+            type: string
+            format: date-time
+        - name: min_probability
+          in: query
+          description: Minimum collision probability
+          schema:
+            type: number
+        - name: page
+          in: query
+          description: Page number
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Items per page
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        '200':
+          description: List of conjunction events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConjunctionList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /api/v1/conjunctions/{conjunction_id}:
+    get:
+      summary: Get conjunction details
+      description: Returns detailed information about a specific conjunction event
+      operationId: getConjunction
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - name: conjunction_id
+          in: path
+          required: true
+          description: Unique identifier of the conjunction event
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Conjunction details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conjunction'
+        '404':
+          description: Conjunction not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /api/v1/spacecraft/{spacecraft_id}/cyber-threats:
+    get:
+      summary: Get cyber threats
+      description: Returns a list of cyber threats for a specific spacecraft
+      operationId: getCyberThreats
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - name: spacecraft_id
+          in: path
+          required: true
+          description: Unique identifier of the spacecraft
+          schema:
+            type: integer
+        - name: start_time
+          in: query
+          description: Start time in ISO 8601 format
+          schema:
+            type: string
+            format: date-time
+        - name: end_time
+          in: query
+          description: End time in ISO 8601 format
+          schema:
+            type: string
+            format: date-time
+        - name: severity
+          in: query
+          description: Filter by severity
+          schema:
+            type: string
+            enum: [low, medium, high, critical]
+        - name: page
+          in: query
+          description: Page number
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Items per page
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        '200':
+          description: List of cyber threats
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CyberThreatList'
+        '404':
+          description: Spacecraft not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /api/v1/stability/data:
+    get:
+      summary: Get stability data
+      description: Returns stability data for spacecraft
+      operationId: getStabilityData
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - name: start_time
+          in: query
+          description: Start time in ISO 8601 format
+          schema:
+            type: string
+            format: date-time
+        - name: end_time
+          in: query
+          description: End time in ISO 8601 format
+          schema:
+            type: string
+            format: date-time
+        - name: spacecraft_id
+          in: query
+          description: Filter by spacecraft ID
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: Page number
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Items per page
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        '200':
+          description: Stability data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StabilityDataList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /api/v1/spacecraft/{spacecraft_id}/telemetry:
+    get:
+      summary: Get telemetry data
+      description: Returns telemetry data for a specific spacecraft
+      operationId: getTelemetryData
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - name: spacecraft_id
+          in: path
+          required: true
+          description: Unique identifier of the spacecraft
+          schema:
+            type: integer
+        - name: start_time
+          in: query
+          description: Start time in ISO 8601 format
+          schema:
+            type: string
+            format: date-time
+        - name: end_time
+          in: query
+          description: End time in ISO 8601 format
+          schema:
+            type: string
+            format: date-time
+        - name: subsystem
+          in: query
+          description: Filter by subsystem
+          schema:
+            type: string
+            enum: [power, thermal, attitude, communications]
+        - name: page
+          in: query
+          description: Page number
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Items per page
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+      responses:
+        '200':
+          description: Telemetry data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TelemetryDataList'
+        '404':
+          description: Spacecraft not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  
+  /api/v1/webhooks:
+    post:
+      summary: Create webhook
+      description: Creates a new webhook subscription
+      operationId: createWebhook
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - url
+                - events
+              properties:
+                url:
+                  type: string
+                  format: uri
+                  example: https://example.com/webhook
+                events:
+                  type: array
+                  items:
+                    type: string
+                    enum: [conjunction.detected, conjunction.updated, cyber_threat.detected, stability.anomaly]
+                  example: ["conjunction.detected", "cyber_threat.detected"]
+                secret:
+                  type: string
+                  example: your-webhook-secret
+      responses:
+        '201':
+          description: Webhook created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 

@@ -1,0 +1,441 @@
+{
+  "info": {
+    "_postman_id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "AstroShield API",
+    "description": "Collection for the AstroShield API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.astroshield.com",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Get Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/token",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "token"]
+            },
+            "description": "Authenticates a user and returns a JWT token"
+          },
+          "response": []
+        }
+      ],
+      "description": "Authentication endpoints"
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Get Health Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "Returns the current health status of the API"
+          },
+          "response": []
+        }
+      ],
+      "description": "Health check endpoints"
+    },
+    {
+      "name": "Spacecraft",
+      "item": [
+        {
+          "name": "List Spacecraft",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/spacecraft?page=1&limit=20&status=active",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "spacecraft"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "key": "status",
+                  "value": "active"
+                }
+              ]
+            },
+            "description": "Returns a list of spacecraft with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Spacecraft Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/spacecraft/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "spacecraft", "1"]
+            },
+            "description": "Returns detailed information about a specific spacecraft"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Spacecraft",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"New Satellite\",\n  \"norad_id\": 12345,\n  \"status\": \"active\",\n  \"orbit_type\": \"GEO\",\n  \"launch_date\": \"2023-01-01T00:00:00Z\",\n  \"orbital_parameters\": {\n    \"semi_major_axis\": 42164,\n    \"eccentricity\": 0.0002,\n    \"inclination\": 0.1,\n    \"raan\": 95.5,\n    \"argument_of_perigee\": 270,\n    \"mean_anomaly\": 0,\n    \"epoch\": \"2023-05-01T12:00:00Z\"\n  },\n  \"physical_parameters\": {\n    \"mass\": 5000,\n    \"length\": 15,\n    \"width\": 3,\n    \"height\": 3,\n    \"cross_section\": 45\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/spacecraft",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "spacecraft"]
+            },
+            "description": "Creates a new spacecraft"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Spacecraft",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"inactive\",\n  \"orbital_parameters\": {\n    \"semi_major_axis\": 42165,\n    \"eccentricity\": 0.0003,\n    \"inclination\": 0.15,\n    \"raan\": 95.6,\n    \"argument_of_perigee\": 271,\n    \"mean_anomaly\": 1,\n    \"epoch\": \"2023-05-02T12:00:00Z\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/spacecraft/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "spacecraft", "1"]
+            },
+            "description": "Updates an existing spacecraft"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Spacecraft",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/spacecraft/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "spacecraft", "1"]
+            },
+            "description": "Deletes an existing spacecraft"
+          },
+          "response": []
+        }
+      ],
+      "description": "Spacecraft endpoints"
+    },
+    {
+      "name": "Conjunctions",
+      "item": [
+        {
+          "name": "Get Conjunction Events",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/conjunctions?spacecraft_id=1&start_time=2023-05-01T00:00:00Z&end_time=2023-05-31T23:59:59Z&min_probability=0.00001&page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "conjunctions"],
+              "query": [
+                {
+                  "key": "spacecraft_id",
+                  "value": "1"
+                },
+                {
+                  "key": "start_time",
+                  "value": "2023-05-01T00:00:00Z"
+                },
+                {
+                  "key": "end_time",
+                  "value": "2023-05-31T23:59:59Z"
+                },
+                {
+                  "key": "min_probability",
+                  "value": "0.00001"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns a list of conjunction events with pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Conjunction Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/conjunctions/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "conjunctions", "1"]
+            },
+            "description": "Returns detailed information about a specific conjunction event"
+          },
+          "response": []
+        }
+      ],
+      "description": "Conjunction analysis endpoints"
+    },
+    {
+      "name": "Cyber Threats",
+      "item": [
+        {
+          "name": "Get Cyber Threats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/spacecraft/1/cyber-threats?start_time=2023-05-01T00:00:00Z&end_time=2023-05-31T23:59:59Z&severity=high&page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "spacecraft", "1", "cyber-threats"],
+              "query": [
+                {
+                  "key": "start_time",
+                  "value": "2023-05-01T00:00:00Z"
+                },
+                {
+                  "key": "end_time",
+                  "value": "2023-05-31T23:59:59Z"
+                },
+                {
+                  "key": "severity",
+                  "value": "high"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns a list of cyber threats for a specific spacecraft"
+          },
+          "response": []
+        }
+      ],
+      "description": "Cyber threat endpoints"
+    },
+    {
+      "name": "Stability",
+      "item": [
+        {
+          "name": "Get Stability Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/stability/data?spacecraft_id=1&start_time=2023-05-01T00:00:00Z&end_time=2023-05-31T23:59:59Z&page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "stability", "data"],
+              "query": [
+                {
+                  "key": "spacecraft_id",
+                  "value": "1"
+                },
+                {
+                  "key": "start_time",
+                  "value": "2023-05-01T00:00:00Z"
+                },
+                {
+                  "key": "end_time",
+                  "value": "2023-05-31T23:59:59Z"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns stability data for spacecraft"
+          },
+          "response": []
+        }
+      ],
+      "description": "Stability analysis endpoints"
+    },
+    {
+      "name": "Telemetry",
+      "item": [
+        {
+          "name": "Get Telemetry Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/spacecraft/1/telemetry?start_time=2023-05-01T00:00:00Z&end_time=2023-05-31T23:59:59Z&subsystem=power&page=1&limit=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "spacecraft", "1", "telemetry"],
+              "query": [
+                {
+                  "key": "start_time",
+                  "value": "2023-05-01T00:00:00Z"
+                },
+                {
+                  "key": "end_time",
+                  "value": "2023-05-31T23:59:59Z"
+                },
+                {
+                  "key": "subsystem",
+                  "value": "power"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Returns telemetry data for a specific spacecraft"
+          },
+          "response": []
+        }
+      ],
+      "description": "Telemetry endpoints"
+    },
+    {
+      "name": "Webhooks",
+      "item": [
+        {
+          "name": "Create Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"https://example.com/webhook\",\n  \"events\": [\"conjunction.detected\", \"cyber_threat.detected\"],\n  \"secret\": \"your-webhook-secret\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/webhooks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "webhooks"]
+            },
+            "description": "Creates a new webhook subscription"
+          },
+          "response": []
+        }
+      ],
+      "description": "Webhook endpoints"
+    }
+  ]
+} 
