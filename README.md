@@ -14,6 +14,7 @@ This integration package provides all the necessary resources for integrating wi
 - [Support](#support)
 - [Version Information](#version-information)
 - [License](#license)
+- [UDL Integration](#udl-integration)
 
 ## Package Contents
 
@@ -30,9 +31,16 @@ This integration package provides all the necessary resources for integrating wi
   - Python examples for API integration (`examples/python/`)
   - Java examples for Kafka consumer integration (`examples/java/`)
   - JavaScript examples for Kafka producer integration (`examples/javascript/`)
+  - UDL Secure Messaging integration examples (`examples/udl_integration_example.py`)
 
 - **Configuration Templates**
   - Kafka client configuration (`config/kafka-client.properties`)
+  
+- **UDL Integration**
+  - UDL API client
+  - UDL Secure Messaging client for real-time data streaming
+  - Data transformers for UDL to AstroShield format conversion
+  - Continuous integration components
 
 ## Getting Started
 
@@ -43,6 +51,7 @@ This integration package provides all the necessary resources for integrating wi
   - Python 3.8+
   - Java 11+
   - Node.js 14+
+- UDL credentials (for UDL integration features)
 
 ### API Integration
 
@@ -226,3 +235,61 @@ If you encounter any issues or have questions about integrating with AstroShield
 This software is proprietary and confidential. See the [LICENSE](LICENSE) file for details.
 
 Copyright (c) 2024 Stardrive Inc. All Rights Reserved. 
+
+## UDL Integration
+
+The AstroShield Integration Package includes a powerful integration with the Unified Data Library (UDL) APIs for space situational awareness data. This integration supports both the REST API for polling-based data retrieval and the Secure Messaging API for real-time streaming.
+
+### Authentication
+
+The UDL client supports three authentication methods:
+
+1. **API Key Authentication**: Set the `UDL_API_KEY` environment variable or pass the `api_key` parameter to the client constructor.
+2. **Basic Authentication**: Set the `UDL_USERNAME` and `UDL_PASSWORD` environment variables or pass the `username` and `password` parameters to the client constructor.
+3. **Token Authentication**: This method is currently not working with the UDL API.
+
+For most users, Basic Authentication is the recommended method.
+
+### Secure Messaging API
+
+The Secure Messaging API provides real-time streaming access to UDL data. To use this feature:
+
+1. **Request Access**: Special authorization is required for the Secure Messaging API. Contact the UDL team to request access by filling out the Secure Messaging Access Form.
+2. **Enable in Configuration**: Set `use_secure_messaging=True` when initializing the `UDLIntegration` class.
+
+Without proper authorization, attempts to access the Secure Messaging API will result in 403 Forbidden errors.
+
+### Basic Usage
+
+```python
+from asttroshield.udl_integration import UDLClient, UDLMessagingClient, UDLIntegration
+
+# Standard REST API client
+client = UDLClient(
+    username="your-username",
+    password="your-password"
+)
+
+# Secure Messaging client (requires special authorization)
+messaging_client = UDLMessagingClient(
+    username="your-username",
+    password="your-password"
+)
+
+# Complete integration with Kafka
+integration = UDLIntegration(
+    udl_username="your-username",
+    udl_password="your-password",
+    kafka_bootstrap_servers="kafka:9092",
+    use_secure_messaging=True  # Enable if you have authorization
+)
+
+# Process specific data types
+integration.process_state_vectors(epoch="now")
+integration.process_conjunctions()
+
+# Stream data in real-time (requires Secure Messaging authorization)
+integration.stream_topic("statevector", transform_state_vector, "astroshield-statevectors")
+```
+
+For more detailed information, examples, and usage, refer to the documentation in the `src/asttroshield/udl_integration/README.md` file. The integration package provides a comprehensive solution for integrating UDL data with your AstroShield Kafka topics and includes extensive examples and documentation to help you get started quickly. 
