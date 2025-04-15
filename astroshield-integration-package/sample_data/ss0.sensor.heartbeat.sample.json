@@ -1,0 +1,317 @@
+[
+  {
+    "header": {
+      "messageId": "hb-1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+      "timestamp": "2023-10-15T15:00:00.000Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.sensor.heartbeat",
+      "traceId": "trace-a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6"
+    },
+    "payload": {
+      "sensorId": "RADAR-ALTAIR",
+      "sensorName": "ALTAIR Radar",
+      "sensorType": "RADAR",
+      "location": {
+        "latitude": 9.3977,
+        "longitude": 167.4792,
+        "altitude": 24.0,
+        "site": "Kwajalein Atoll",
+        "noradId": 12345
+      },
+      "status": "OPERATIONAL",
+      "lastContactTime": "2023-10-15T14:59:55.123Z",
+      "uptime": 8743.5,
+      "healthMetrics": {
+        "cpuUtilization": 42.3,
+        "memoryUtilization": 38.7,
+        "diskUtilization": 56.2,
+        "networkLatency": 12.4,
+        "powerStatus": "NOMINAL",
+        "temperatureStatus": "NOMINAL"
+      },
+      "operationalMetrics": {
+        "trackingCapacity": 95.2,
+        "currentTrackCount": 37,
+        "detectionsSinceLastHeartbeat": 14,
+        "falseAlarmRate": 0.02
+      },
+      "maintenanceStatus": {
+        "lastMaintenanceDate": "2023-09-15T08:00:00.000Z",
+        "nextScheduledMaintenance": "2023-11-15T08:00:00.000Z",
+        "maintenanceFlags": []
+      },
+      "coverageInfo": {
+        "azimuthRange": {
+          "min": 0,
+          "max": 360
+        },
+        "elevationRange": {
+          "min": 5,
+          "max": 85
+        },
+        "rangeCapability": {
+          "min": 100,
+          "max": 5000,
+          "units": "km"
+        },
+        "frequencyBand": "UHF"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "hb-2b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+      "timestamp": "2023-10-15T15:00:05.000Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.sensor.heartbeat",
+      "traceId": "trace-b2c3d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7"
+    },
+    "payload": {
+      "sensorId": "OPTICAL-GEODSS-DIEGO",
+      "sensorName": "GEODSS Diego Garcia",
+      "sensorType": "OPTICAL",
+      "location": {
+        "latitude": -7.3195,
+        "longitude": 72.4229,
+        "altitude": 3.0,
+        "site": "Diego Garcia",
+        "noradId": 12346
+      },
+      "status": "OPERATIONAL",
+      "lastContactTime": "2023-10-15T14:59:58.456Z",
+      "uptime": 4321.7,
+      "healthMetrics": {
+        "cpuUtilization": 35.8,
+        "memoryUtilization": 42.1,
+        "diskUtilization": 48.9,
+        "networkLatency": 18.2,
+        "powerStatus": "NOMINAL",
+        "temperatureStatus": "NOMINAL"
+      },
+      "operationalMetrics": {
+        "trackingCapacity": 98.7,
+        "currentTrackCount": 52,
+        "detectionsSinceLastHeartbeat": 23,
+        "falseAlarmRate": 0.015
+      },
+      "maintenanceStatus": {
+        "lastMaintenanceDate": "2023-09-28T10:00:00.000Z",
+        "nextScheduledMaintenance": "2023-11-28T10:00:00.000Z",
+        "maintenanceFlags": []
+      },
+      "coverageInfo": {
+        "azimuthRange": {
+          "min": 0,
+          "max": 360
+        },
+        "elevationRange": {
+          "min": 15,
+          "max": 90
+        },
+        "magnitudeLimit": 16.5,
+        "weatherConditions": "CLEAR",
+        "moonPhase": "NEW_MOON"
+      },
+      "environmentalConditions": {
+        "cloudCover": 5,
+        "visibility": 9.8,
+        "windSpeed": 3.2,
+        "temperature": 26.7
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "hb-3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+      "timestamp": "2023-10-15T15:00:10.000Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.sensor.heartbeat",
+      "traceId": "trace-c3d4e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8"
+    },
+    "payload": {
+      "sensorId": "SBSS-1",
+      "sensorName": "Space Based Space Surveillance",
+      "sensorType": "SPACE_BASED_OPTICAL",
+      "location": {
+        "orbitalParameters": {
+          "semiMajorAxis": 7158.0,
+          "eccentricity": 0.0001,
+          "inclination": 98.2,
+          "rightAscension": 125.3,
+          "argumentOfPerigee": 0.0,
+          "meanAnomaly": 45.7
+        }
+      },
+      "status": "DEGRADED",
+      "lastContactTime": "2023-10-15T14:59:45.789Z",
+      "uptime": 12567.3,
+      "healthMetrics": {
+        "cpuUtilization": 67.2,
+        "memoryUtilization": 72.5,
+        "diskUtilization": 81.3,
+        "powerStatus": "NOMINAL",
+        "temperatureStatus": "WARNING",
+        "batteryLevel": 78.4
+      },
+      "operationalMetrics": {
+        "trackingCapacity": 65.3,
+        "currentTrackCount": 41,
+        "detectionsSinceLastHeartbeat": 18,
+        "falseAlarmRate": 0.035
+      },
+      "maintenanceStatus": {
+        "lastMaintenanceDate": "2023-08-10T00:00:00.000Z",
+        "nextScheduledMaintenance": null,
+        "maintenanceFlags": [
+          "COOLING_SYSTEM_ISSUE",
+          "ATTITUDE_CONTROL_DEGRADATION"
+        ]
+      },
+      "coverageInfo": {
+        "fieldOfView": 2.5,
+        "magnitudeLimit": 15.0,
+        "scanRate": 0.1,
+        "revisitRate": 24.0,
+        "currentRegion": "NORTHERN_HEMISPHERE"
+      },
+      "anomalies": [
+        {
+          "anomalyType": "THERMAL_CONTROL",
+          "severity": "MODERATE",
+          "description": "Elevated temperatures in imaging subsystem",
+          "detectionTime": "2023-10-15T12:34:56.000Z",
+          "mitigationStatus": "IN_PROGRESS"
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "messageId": "hb-4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
+      "timestamp": "2023-10-15T15:00:15.000Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.sensor.heartbeat",
+      "traceId": "trace-d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9"
+    },
+    "payload": {
+      "sensorId": "RADAR-COBRA-DANE",
+      "sensorName": "COBRA DANE Radar",
+      "sensorType": "RADAR",
+      "location": {
+        "latitude": 51.8806,
+        "longitude": -174.0911,
+        "altitude": 37.0,
+        "site": "Shemya Island, Alaska",
+        "noradId": 12347
+      },
+      "status": "MAINTENANCE",
+      "lastContactTime": "2023-10-15T14:30:00.000Z",
+      "uptime": 0.5,
+      "healthMetrics": {
+        "cpuUtilization": 12.1,
+        "memoryUtilization": 15.3,
+        "diskUtilization": 45.7,
+        "networkLatency": 25.6,
+        "powerStatus": "NOMINAL",
+        "temperatureStatus": "NOMINAL"
+      },
+      "operationalMetrics": {
+        "trackingCapacity": 0.0,
+        "currentTrackCount": 0,
+        "detectionsSinceLastHeartbeat": 0,
+        "falseAlarmRate": 0.0
+      },
+      "maintenanceStatus": {
+        "lastMaintenanceDate": "2023-10-15T14:00:00.000Z",
+        "nextScheduledMaintenance": "2023-10-15T18:00:00.000Z",
+        "maintenanceFlags": [
+          "SCHEDULED_MAINTENANCE",
+          "TRANSMITTER_UPGRADE"
+        ],
+        "maintenanceProgress": 35.0,
+        "estimatedCompletionTime": "2023-10-15T18:00:00.000Z"
+      },
+      "coverageInfo": {
+        "azimuthRange": {
+          "min": 270,
+          "max": 360
+        },
+        "elevationRange": {
+          "min": 3,
+          "max": 85
+        },
+        "rangeCapability": {
+          "min": 100,
+          "max": 3000,
+          "units": "km"
+        },
+        "frequencyBand": "L"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "hb-5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t",
+      "timestamp": "2023-10-15T15:00:20.000Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.sensor.heartbeat",
+      "traceId": "trace-e5f6g7h8-i9j0-k1l2-m3n4-o5p6q7r8s9t0"
+    },
+    "payload": {
+      "sensorId": "RF-MEERKAT",
+      "sensorName": "MeerKAT Radio Telescope",
+      "sensorType": "RADIO",
+      "location": {
+        "latitude": -30.7224,
+        "longitude": 21.4111,
+        "altitude": 1054.0,
+        "site": "Karoo, South Africa",
+        "noradId": 12348
+      },
+      "status": "OFFLINE",
+      "lastContactTime": "2023-10-15T14:45:12.345Z",
+      "uptime": 0.0,
+      "healthMetrics": {
+        "cpuUtilization": 0.0,
+        "memoryUtilization": 0.0,
+        "diskUtilization": 65.2,
+        "networkLatency": null,
+        "powerStatus": "OFFLINE",
+        "temperatureStatus": "NOMINAL"
+      },
+      "operationalMetrics": {
+        "trackingCapacity": 0.0,
+        "currentTrackCount": 0,
+        "detectionsSinceLastHeartbeat": 0,
+        "falseAlarmRate": 0.0
+      },
+      "maintenanceStatus": {
+        "lastMaintenanceDate": "2023-10-01T08:00:00.000Z",
+        "nextScheduledMaintenance": "2023-10-16T08:00:00.000Z",
+        "maintenanceFlags": []
+      },
+      "coverageInfo": {
+        "azimuthRange": {
+          "min": 0,
+          "max": 360
+        },
+        "elevationRange": {
+          "min": 15,
+          "max": 90
+        },
+        "frequencyRange": {
+          "min": 900,
+          "max": 1670,
+          "units": "MHz"
+        }
+      },
+      "outageInfo": {
+        "outageStartTime": "2023-10-15T14:45:12.345Z",
+        "estimatedResolutionTime": "2023-10-15T18:00:00.000Z",
+        "reason": "POWER_OUTAGE",
+        "description": "Regional power outage affecting facility",
+        "mitigationInProgress": true
+      }
+    }
+  }
+] 

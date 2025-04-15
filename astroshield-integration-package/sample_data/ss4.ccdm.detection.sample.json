@@ -1,0 +1,322 @@
+[
+  {
+    "header": {
+      "messageId": "ccdm-9f2e8d7c-3b5a-48f1-a9e5-7d3c2b1f8e4a",
+      "timestamp": "2023-10-15T16:34:12.456Z",
+      "source": "ss4_ccdm_detection",
+      "messageType": "ss4.ccdm.detection",
+      "traceId": "trace-8d7f6e5c-4b3a-2d1e-9f8c-7b6a5d4c3e2b", 
+      "parentMessageIds": [
+        "sv-28f3e714-37d3-4fb9-8f3c-dfc8933d721f",
+        "sv-7bc9e416-23a1-49d9-98d5-463abf1e5924"
+      ]
+    },
+    "payload": {
+      "detectionId": "ccdm-9f2e8d7c-3b5a-48f1-a9e5-7d3c2b1f8e4a",
+      "objectId": "SATCAT-43013",
+      "objectName": "STARLINK-1047",
+      "detectionTime": "2023-10-15T16:34:12.456Z",
+      "ccdmType": "MANEUVERING",
+      "confidence": 0.93,
+      "indicators": [
+        {
+          "indicatorType": "DELTA_V",
+          "value": 0.034,
+          "units": "km/s",
+          "confidence": 0.95,
+          "description": "Unexpected velocity change detected"
+        },
+        {
+          "indicatorType": "TRAJECTORY_CHANGE",
+          "value": 2.3,
+          "units": "degrees",
+          "confidence": 0.91,
+          "description": "Orbital plane change observed"
+        }
+      ],
+      "details": {
+        "maneuverStartTime": "2023-10-15T16:30:00.000Z",
+        "maneuverEndTime": "2023-10-15T16:32:45.000Z",
+        "deltaV": {
+          "magnitude": 0.034,
+          "units": "km/s",
+          "components": {
+            "radial": 0.005,
+            "inTrack": 0.032,
+            "crossTrack": 0.008
+          }
+        },
+        "burnDuration": 165,
+        "propulsionType": "ELECTRIC"
+      },
+      "evidenceData": {
+        "preManeuverStateVector": {
+          "position": {
+            "x": 5899.3145,
+            "y": 3899.3413,
+            "z": 782.3487
+          },
+          "velocity": {
+            "x": -5.3871,
+            "y": 3.9932,
+            "z": 2.0989
+          },
+          "epoch": "2023-10-15T16:29:00.000Z"
+        },
+        "postManeuverStateVector": {
+          "position": {
+            "x": 5894.7623,
+            "y": 3903.2341,
+            "z": 783.1245
+          },
+          "velocity": {
+            "x": -5.3754,
+            "y": 4.0245,
+            "z": 2.1034
+          },
+          "epoch": "2023-10-15T16:33:00.000Z"
+        },
+        "observationIds": [
+          "obs-892f5c1a-4e19-49bc-9f12-c4a87bb3d442",
+          "obs-763e4f82-31a9-4d75-b291-59a87c453e21"
+        ]
+      },
+      "assessment": {
+        "maneuverType": "STATION_KEEPING",
+        "expected": true,
+        "anomalyScore": 0.23,
+        "intentAssessment": "NORMAL_OPERATIONS",
+        "notes": "Regular station keeping maneuver for constellation maintenance"
+      },
+      "targetObject": {
+        "objectId": "SATCAT-43013",
+        "noradId": 43013,
+        "objectName": "STARLINK-1047",
+        "stateVectorId": "sv-7bc9e416-23a1-49d9-98d5-463abf1e5924"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "ccdm-3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d",
+      "timestamp": "2023-10-15T17:23:54.789Z",
+      "source": "ss4_ccdm_detection",
+      "messageType": "ss4.ccdm.detection",
+      "traceId": "trace-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "parentMessageIds": [
+        "sv-21c47e8a-9f36-4d12-b578-3a91e74f8c23"
+      ]
+    },
+    "payload": {
+      "detectionId": "ccdm-3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d",
+      "objectId": "SATCAT-39084",
+      "objectName": "USA-247 (WGS F5)",
+      "detectionTime": "2023-10-15T17:23:54.789Z",
+      "ccdmType": "CAMOUFLAGE",
+      "confidence": 0.87,
+      "indicators": [
+        {
+          "indicatorType": "RADAR_CROSS_SECTION_CHANGE",
+          "value": -4.6,
+          "units": "dBsm",
+          "confidence": 0.89,
+          "description": "Significant decrease in radar cross-section"
+        },
+        {
+          "indicatorType": "OPTICAL_SIGNATURE_CHANGE",
+          "value": -2.1,
+          "units": "magnitude",
+          "confidence": 0.85,
+          "description": "Decrease in visual brightness"
+        }
+      ],
+      "details": {
+        "signatureChangeStartTime": "2023-10-15T17:10:00.000Z",
+        "signatureChangeEndTime": "2023-10-15T17:15:00.000Z",
+        "signatureChangeDuration": 300,
+        "method": "SURFACE_TREATMENT",
+        "affectedSensors": [
+          "RADAR",
+          "OPTICAL"
+        ]
+      },
+      "evidenceData": {
+        "preChangeSignature": {
+          "radarCrossSection": 2.3,
+          "opticalMagnitude": 12.4,
+          "thermalSignature": 28.7,
+          "epoch": "2023-10-15T17:05:00.000Z"
+        },
+        "postChangeSignature": {
+          "radarCrossSection": 0.51,
+          "opticalMagnitude": 14.5,
+          "thermalSignature": 27.9,
+          "epoch": "2023-10-15T17:20:00.000Z"
+        },
+        "observationIds": [
+          "obs-4e9a713c-5d28-4b16-a937-2c81f4e95a27",
+          "obs-5d21b43c-8e37-4a16-b942-1d73f5e84b26"
+        ]
+      },
+      "assessment": {
+        "signatureChangeType": "STEALTH_MODE",
+        "expected": false,
+        "anomalyScore": 0.76,
+        "intentAssessment": "POTENTIAL_HOSTILE",
+        "notes": "Unexpected signature change not aligned with historical behavior of this spacecraft"
+      },
+      "targetObject": {
+        "objectId": "SATCAT-39084",
+        "noradId": 39084,
+        "objectName": "USA-247 (WGS F5)",
+        "stateVectorId": "sv-21c47e8a-9f36-4d12-b578-3a91e74f8c23"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "ccdm-5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b",
+      "timestamp": "2023-10-15T18:12:37.123Z",
+      "source": "ss4_ccdm_detection",
+      "messageType": "ss4.ccdm.detection",
+      "traceId": "trace-7e8f9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b",
+      "parentMessageIds": [
+        "sv-6f28d93a-42e5-48b2-a792-783c19ef4d65"
+      ]
+    },
+    "payload": {
+      "detectionId": "ccdm-5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b",
+      "objectId": "SATCAT-48274",
+      "objectName": "UNKNOWN OBJECT",
+      "detectionTime": "2023-10-15T18:12:37.123Z",
+      "ccdmType": "DECEPTION",
+      "confidence": 0.92,
+      "indicators": [
+        {
+          "indicatorType": "RF_EMISSIONS",
+          "confidence": 0.94,
+          "description": "Detected RF emissions matching known civilian satellite patterns"
+        },
+        {
+          "indicatorType": "IDENTITY_SPOOFING",
+          "confidence": 0.91,
+          "description": "Object broadcasting NORAD ID of inactive satellite"
+        }
+      ],
+      "details": {
+        "deceptionStartTime": "2023-10-15T18:00:00.000Z",
+        "deceptionMethod": "SIGNAL_SPOOFING",
+        "spoofedIdentity": "SATCAT-24786",
+        "spoofedObjectName": "IRIDIUM 33 DEBRIS",
+        "affectedSystems": [
+          "SPACE_SURVEILLANCE_NETWORK",
+          "CIVILIAN_TRACKING_SYSTEMS"
+        ]
+      },
+      "evidenceData": {
+        "signalCharacteristics": {
+          "frequency": 2.2567,
+          "units": "GHz",
+          "modulation": "QPSK",
+          "signalStrength": -105.3,
+          "units2": "dBm"
+        },
+        "metadataDiscrepancies": [
+          "ORBITAL_ELEMENTS_MISMATCH",
+          "LAUNCH_DATE_INCONSISTENCY",
+          "SIZE_CATEGORY_MISMATCH"
+        ],
+        "observationIds": [
+          "obs-2c51a87b-6fa9-4e83-9d47-2c7a3b6f9e21",
+          "obs-3d62a98c-7fb0-5e94-0e58-3d84g6e95c38"
+        ]
+      },
+      "assessment": {
+        "deceptionPurpose": "HIDE_ACTUAL_IDENTITY",
+        "expected": false,
+        "anomalyScore": 0.89,
+        "intentAssessment": "HOSTILE",
+        "threatLevel": "HIGH",
+        "notes": "Object attempting to appear as debris while demonstrating controlled behavior"
+      },
+      "targetObject": {
+        "objectId": "SATCAT-48274",
+        "noradId": 48274,
+        "objectName": "UNKNOWN OBJECT",
+        "stateVectorId": "sv-6f28d93a-42e5-48b2-a792-783c19ef4d65"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "ccdm-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "timestamp": "2023-10-15T19:05:45.678Z",
+      "source": "ss4_ccdm_detection",
+      "messageType": "ss4.ccdm.detection",
+      "traceId": "trace-3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      "parentMessageIds": [
+        "sv-1aef5d23-9b71-42c8-8731-49cca137b521"
+      ]
+    },
+    "payload": {
+      "detectionId": "ccdm-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "objectId": "SATCAT-37849",
+      "objectName": "GOES-16",
+      "detectionTime": "2023-10-15T19:05:45.678Z",
+      "ccdmType": "CONCEALMENT",
+      "confidence": 0.79,
+      "indicators": [
+        {
+          "indicatorType": "ECLIPSE_EXPLOITATION",
+          "confidence": 0.83,
+          "description": "Activity timed to occur during ground station eclipse"
+        },
+        {
+          "indicatorType": "SENSOR_GAP_EXPLOITATION",
+          "confidence": 0.76,
+          "description": "Maneuver performed during known sensor coverage gap"
+        }
+      ],
+      "details": {
+        "concealmentStartTime": "2023-10-15T18:55:00.000Z",
+        "concealmentEndTime": "2023-10-15T19:10:00.000Z",
+        "concealmentDuration": 900,
+        "method": "TIMING_EXPLOITATION",
+        "exploitedVulnerabilities": [
+          "GROUND_STATION_ECLIPSE",
+          "SENSOR_COVERAGE_GAP",
+          "PROCESSING_DELAY"
+        ]
+      },
+      "evidenceData": {
+        "coverageGapStart": "2023-10-15T18:58:00.000Z",
+        "coverageGapEnd": "2023-10-15T19:07:00.000Z",
+        "inferredActivityDuringGap": "POSSIBLE_PAYLOAD_DEPLOYMENT",
+        "observationIds": [
+          "obs-763e4f82-31a9-4d75-b291-59a87c453e21",
+          "obs-874f5g93-42b0-5e86-c392-60b98d564f32"
+        ]
+      },
+      "assessment": {
+        "concealmentPurpose": "HIDE_SECONDARY_PAYLOAD_DEPLOYMENT",
+        "expected": false,
+        "anomalyScore": 0.68,
+        "intentAssessment": "SUSPICIOUS",
+        "notes": "Weather satellite performed activity during coverage gap. Post-gap analysis suggests possible deployment of secondary object."
+      },
+      "targetObject": {
+        "objectId": "SATCAT-37849",
+        "noradId": 37849,
+        "objectName": "GOES-16",
+        "stateVectorId": "sv-1aef5d23-9b71-42c8-8731-49cca137b521"
+      },
+      "relatedObjects": [
+        {
+          "objectId": "SATCAT-UNKNOWN-01",
+          "relationshipType": "POSSIBLY_DEPLOYED",
+          "confidence": 0.64
+        }
+      ]
+    }
+  }
+] 

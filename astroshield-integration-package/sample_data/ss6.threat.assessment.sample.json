@@ -1,0 +1,499 @@
+[
+  {
+    "header": {
+      "messageId": "threat-7d8e9f0a-1b2c-3d4e-5f6g-7h8i9j0k1l2m",
+      "timestamp": "2023-10-15T19:15:23.456Z",
+      "source": "ss6_threat_assessment",
+      "messageType": "ss6.threat.assessment",
+      "traceId": "trace-7e8f9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b",
+      "parentMessageIds": [
+        "ccdm-5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b"
+      ]
+    },
+    "payload": {
+      "threatId": "threat-7d8e9f0a-1b2c-3d4e-5f6g-7h8i9j0k1l2m",
+      "objectId": "SATCAT-48274",
+      "objectName": "UNKNOWN OBJECT",
+      "assessmentTime": "2023-10-15T19:15:23.456Z",
+      "threatType": "DECEPTION",
+      "severityLevel": "HIGH",
+      "confidence": 0.91,
+      "sourceEvents": [
+        {
+          "eventId": "ccdm-5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b",
+          "eventType": "CCDM_DETECTION",
+          "weight": 0.85
+        }
+      ],
+      "analysis": {
+        "summary": "Object is actively employing deception techniques to mask its true identity and capabilities",
+        "technicalDetails": "Signal spoofing detected with characteristics inconsistent with claimed identity. Object is broadcasting as debris while demonstrating controlled maneuvering capabilities.",
+        "intentAssessment": "HOSTILE",
+        "confidenceFactors": [
+          {
+            "factor": "SIGNAL_ANALYSIS",
+            "confidence": 0.94,
+            "description": "Signal characteristics inconsistent with claimed identity"
+          },
+          {
+            "factor": "HISTORICAL_BEHAVIOR",
+            "confidence": 0.87,
+            "description": "No previous record of this object in catalog"
+          },
+          {
+            "factor": "MANEUVER_CAPABILITY",
+            "confidence": 0.92,
+            "description": "Demonstrated controlled behavior inconsistent with debris"
+          }
+        ]
+      },
+      "potentialTargets": [
+        {
+          "objectId": "SATCAT-25544",
+          "objectName": "ISS (ZARYA)",
+          "likelihood": 0.76,
+          "timeToProximity": {
+            "value": 120.9,
+            "units": "hours"
+          }
+        }
+      ],
+      "recommendations": [
+        {
+          "actionId": "action-1a2b3c",
+          "priority": "HIGH",
+          "description": "Increase monitoring frequency of this object",
+          "timeline": "IMMEDIATE"
+        },
+        {
+          "actionId": "action-4d5e6f",
+          "priority": "MEDIUM",
+          "description": "Alert ISS of potential hostile object on intercept trajectory",
+          "timeline": "WITHIN_24_HOURS"
+        },
+        {
+          "actionId": "action-7g8h9i",
+          "priority": "MEDIUM",
+          "description": "Prepare contingency plans for ISS avoidance maneuver",
+          "timeline": "WITHIN_48_HOURS"
+        }
+      ],
+      "timeline": {
+        "detectionTime": "2023-10-15T18:12:37.123Z",
+        "assessmentTime": "2023-10-15T19:15:23.456Z",
+        "projectedTimeToAction": {
+          "value": 24,
+          "units": "hours"
+        },
+        "timeToImpact": {
+          "value": 120.9,
+          "units": "hours"
+        }
+      },
+      "metadata": {
+        "analysisVersion": "2.3.1",
+        "analystId": "SYSTEM",
+        "reviewStatus": "PENDING_HUMAN_REVIEW",
+        "classification": "SECRET"
+      },
+      "noradId": 48274
+    }
+  },
+  {
+    "header": {
+      "messageId": "threat-2a3b4c5d-6e7f-8g9h-0i1j-2k3l4m5n6o7p",
+      "timestamp": "2023-10-15T19:20:45.789Z",
+      "source": "ss6_threat_assessment",
+      "messageType": "ss6.threat.assessment",
+      "traceId": "trace-f7a1e4d9-6c38-4b25-a971-5e84f2c31a9d",
+      "parentMessageIds": [
+        "conj-8a23b917-4d65-48ef-9c31-7a2b4e8d91f5"
+      ]
+    },
+    "payload": {
+      "threatId": "threat-2a3b4c5d-6e7f-8g9h-0i1j-2k3l4m5n6o7p",
+      "objectId": "SATCAT-43013",
+      "objectName": "STARLINK-1047",
+      "assessmentTime": "2023-10-15T19:20:45.789Z",
+      "threatType": "COLLISION",
+      "severityLevel": "HIGH",
+      "confidence": 0.89,
+      "sourceEvents": [
+        {
+          "eventId": "conj-8a23b917-4d65-48ef-9c31-7a2b4e8d91f5",
+          "eventType": "CONJUNCTION",
+          "weight": 0.95
+        }
+      ],
+      "analysis": {
+        "summary": "High probability collision threat between STARLINK-1047 and ISS",
+        "technicalDetails": "Close approach of 14.3 km with probability of collision at 1.2e-5. Impact would generate approximately 487 debris pieces and potentially endanger ISS crew.",
+        "intentAssessment": "UNINTENTIONAL",
+        "confidenceFactors": [
+          {
+            "factor": "CONJUNCTION_ANALYSIS",
+            "confidence": 0.92,
+            "description": "High-precision conjunction analysis with quality ephemeris data"
+          },
+          {
+            "factor": "HISTORICAL_BEHAVIOR",
+            "confidence": 0.85,
+            "description": "Starlink has history of responsive collision avoidance"
+          }
+        ]
+      },
+      "potentialTargets": [
+        {
+          "objectId": "SATCAT-25544",
+          "objectName": "ISS (ZARYA)",
+          "likelihood": 0.95,
+          "timeToProximity": {
+            "value": 40.6,
+            "units": "hours"
+          }
+        }
+      ],
+      "recommendations": [
+        {
+          "actionId": "action-8p9q0r",
+          "priority": "HIGH",
+          "description": "Coordinate with SpaceX for Starlink avoidance maneuver",
+          "timeline": "IMMEDIATE"
+        },
+        {
+          "actionId": "action-1s2t3u",
+          "priority": "MEDIUM",
+          "description": "Prepare ISS for potential avoidance maneuver if Starlink unable to maneuver",
+          "timeline": "WITHIN_24_HOURS"
+        }
+      ],
+      "timeline": {
+        "detectionTime": "2023-10-15T15:45:12.783Z",
+        "assessmentTime": "2023-10-15T19:20:45.789Z",
+        "projectedTimeToAction": {
+          "value": 16,
+          "units": "hours"
+        },
+        "timeToImpact": {
+          "value": 40.6,
+          "units": "hours"
+        }
+      },
+      "metadata": {
+        "analysisVersion": "2.3.1",
+        "analystId": "SYSTEM",
+        "reviewStatus": "HUMAN_REVIEWED",
+        "reviewerId": "ANALYST-JD42",
+        "classification": "UNCLASSIFIED"
+      },
+      "noradId": 43013
+    }
+  },
+  {
+    "header": {
+      "messageId": "threat-3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+      "timestamp": "2023-10-15T19:25:12.345Z",
+      "source": "ss6_threat_assessment",
+      "messageType": "ss6.threat.assessment",
+      "traceId": "trace-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "parentMessageIds": [
+        "ccdm-3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d"
+      ]
+    },
+    "payload": {
+      "threatId": "threat-3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+      "objectId": "SATCAT-39084",
+      "objectName": "USA-247 (WGS F5)",
+      "assessmentTime": "2023-10-15T19:25:12.345Z",
+      "threatType": "CAMOUFLAGE",
+      "severityLevel": "MEDIUM",
+      "confidence": 0.82,
+      "sourceEvents": [
+        {
+          "eventId": "ccdm-3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d",
+          "eventType": "CCDM_DETECTION",
+          "weight": 0.87
+        }
+      ],
+      "analysis": {
+        "summary": "Military satellite employing signature reduction techniques outside normal operational parameters",
+        "technicalDetails": "Significant decrease in radar cross-section (-4.6 dBsm) and optical magnitude (-2.1) detected. Timing coincides with upcoming conjunction with GOES-16.",
+        "intentAssessment": "POTENTIAL_HOSTILE",
+        "confidenceFactors": [
+          {
+            "factor": "SIGNATURE_ANALYSIS",
+            "confidence": 0.89,
+            "description": "Confirmed signature reduction across multiple sensor types"
+          },
+          {
+            "factor": "HISTORICAL_BEHAVIOR",
+            "confidence": 0.76,
+            "description": "Behavior deviates from historical operations of this satellite"
+          },
+          {
+            "factor": "TIMING_CORRELATION",
+            "confidence": 0.81,
+            "description": "Signature change coincides with upcoming conjunction event"
+          }
+        ]
+      },
+      "potentialTargets": [
+        {
+          "objectId": "SATCAT-37849",
+          "objectName": "GOES-16",
+          "likelihood": 0.68,
+          "timeToProximity": {
+            "value": 80.4,
+            "units": "hours"
+          }
+        }
+      ],
+      "recommendations": [
+        {
+          "actionId": "action-4s5t6u",
+          "priority": "MEDIUM",
+          "description": "Increase monitoring frequency of USA-247",
+          "timeline": "IMMEDIATE"
+        },
+        {
+          "actionId": "action-7v8w9x",
+          "priority": "MEDIUM",
+          "description": "Alert GOES operators of potential hostile approach",
+          "timeline": "WITHIN_24_HOURS"
+        },
+        {
+          "actionId": "action-0y1z2a",
+          "priority": "LOW",
+          "description": "Prepare diplomatic channels for potential inquiry",
+          "timeline": "WITHIN_48_HOURS"
+        }
+      ],
+      "timeline": {
+        "detectionTime": "2023-10-15T17:23:54.789Z",
+        "assessmentTime": "2023-10-15T19:25:12.345Z",
+        "projectedTimeToAction": {
+          "value": 24,
+          "units": "hours"
+        },
+        "timeToImpact": {
+          "value": 80.4,
+          "units": "hours"
+        }
+      },
+      "metadata": {
+        "analysisVersion": "2.3.1",
+        "analystId": "SYSTEM",
+        "reviewStatus": "PENDING_HUMAN_REVIEW",
+        "classification": "TOP_SECRET"
+      },
+      "noradId": 39084
+    }
+  },
+  {
+    "header": {
+      "messageId": "threat-4e5f6g7h-8i9j-0k1l-2m3n-4o5p6q7r8s9t",
+      "timestamp": "2023-10-15T19:30:34.567Z",
+      "source": "ss6_threat_assessment",
+      "messageType": "ss6.threat.assessment",
+      "traceId": "trace-3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      "parentMessageIds": [
+        "ccdm-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+      ]
+    },
+    "payload": {
+      "threatId": "threat-4e5f6g7h-8i9j-0k1l-2m3n-4o5p6q7r8s9t",
+      "objectId": "SATCAT-37849",
+      "objectName": "GOES-16",
+      "assessmentTime": "2023-10-15T19:30:34.567Z",
+      "threatType": "CONCEALMENT",
+      "severityLevel": "LOW",
+      "confidence": 0.71,
+      "sourceEvents": [
+        {
+          "eventId": "ccdm-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+          "eventType": "CCDM_DETECTION",
+          "weight": 0.79
+        }
+      ],
+      "analysis": {
+        "summary": "Weather satellite potentially deployed secondary object during sensor coverage gap",
+        "technicalDetails": "Activity occurred during 9-minute coverage gap. Post-gap analysis suggests possible deployment of small secondary object, though evidence is circumstantial.",
+        "intentAssessment": "SUSPICIOUS",
+        "confidenceFactors": [
+          {
+            "factor": "COVERAGE_GAP_ANALYSIS",
+            "confidence": 0.83,
+            "description": "Confirmed sensor coverage gap during activity period"
+          },
+          {
+            "factor": "POST_GAP_ANALYSIS",
+            "confidence": 0.64,
+            "description": "Weak evidence of secondary object deployment"
+          },
+          {
+            "factor": "HISTORICAL_BEHAVIOR",
+            "confidence": 0.67,
+            "description": "GOES satellites not known for secondary payload deployments"
+          }
+        ]
+      },
+      "potentialTargets": [
+        {
+          "objectId": "VARIOUS_SATS",
+          "objectName": "Multiple GEO satellites",
+          "likelihood": 0.42,
+          "timeToProximity": {
+            "value": "UNKNOWN",
+            "units": "N/A"
+          }
+        }
+      ],
+      "recommendations": [
+        {
+          "actionId": "action-3b4c5d",
+          "priority": "MEDIUM",
+          "description": "Conduct focused search for potential deployed object in GEO belt",
+          "timeline": "WITHIN_24_HOURS"
+        },
+        {
+          "actionId": "action-6e7f8g",
+          "priority": "LOW",
+          "description": "Review historical coverage gaps for similar patterns",
+          "timeline": "WITHIN_72_HOURS"
+        }
+      ],
+      "timeline": {
+        "detectionTime": "2023-10-15T19:05:45.678Z",
+        "assessmentTime": "2023-10-15T19:30:34.567Z",
+        "projectedTimeToAction": {
+          "value": 24,
+          "units": "hours"
+        },
+        "timeToImpact": {
+          "value": "UNKNOWN",
+          "units": "N/A"
+        }
+      },
+      "metadata": {
+        "analysisVersion": "2.3.1",
+        "analystId": "SYSTEM",
+        "reviewStatus": "PENDING_HUMAN_REVIEW",
+        "classification": "SECRET"
+      },
+      "noradId": 37849
+    }
+  },
+  {
+    "header": {
+      "messageId": "threat-5g6h7i8j-9k0l-1m2n-3o4p-5q6r7s8t9u0v",
+      "timestamp": "2023-10-15T19:35:56.789Z",
+      "source": "ss6_threat_assessment",
+      "messageType": "ss6.threat.assessment",
+      "traceId": "trace-b8c2d7a6-4f3e-5c91-8d27-3a6b5c4d8e9f",
+      "parentMessageIds": [
+        "conj-5a7d9f3b-2e6c-4a57-b82d-1f4e8c3a7d9e"
+      ]
+    },
+    "payload": {
+      "threatId": "threat-5g6h7i8j-9k0l-1m2n-3o4p-5q6r7s8t9u0v",
+      "objectId": "SATCAT-48274",
+      "objectName": "UNKNOWN OBJECT",
+      "assessmentTime": "2023-10-15T19:35:56.789Z",
+      "threatType": "COLLISION",
+      "severityLevel": "CRITICAL",
+      "confidence": 0.96,
+      "sourceEvents": [
+        {
+          "eventId": "conj-5a7d9f3b-2e6c-4a57-b82d-1f4e8c3a7d9e",
+          "eventType": "CONJUNCTION",
+          "weight": 0.98
+        },
+        {
+          "eventId": "ccdm-5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b",
+          "eventType": "CCDM_DETECTION",
+          "weight": 0.92
+        }
+      ],
+      "analysis": {
+        "summary": "Critical collision threat between unknown object with deceptive behavior and ISS",
+        "technicalDetails": "Extremely close approach of 1.5 km with probability of collision at 2.8e-4. Object has demonstrated deceptive behavior and controlled maneuvering. Collision would be catastrophic with 782 debris pieces and direct threat to human life.",
+        "intentAssessment": "LIKELY_INTENTIONAL",
+        "confidenceFactors": [
+          {
+            "factor": "CONJUNCTION_ANALYSIS",
+            "confidence": 0.97,
+            "description": "High-precision conjunction analysis with quality ephemeris data"
+          },
+          {
+            "factor": "DECEPTION_CORRELATION",
+            "confidence": 0.92,
+            "description": "Object has demonstrated deceptive behavior"
+          },
+          {
+            "factor": "MANEUVER_ANALYSIS",
+            "confidence": 0.94,
+            "description": "Object trajectory appears deliberately targeted"
+          }
+        ]
+      },
+      "potentialTargets": [
+        {
+          "objectId": "SATCAT-25544",
+          "objectName": "ISS (ZARYA)",
+          "likelihood": 0.98,
+          "timeToProximity": {
+            "value": 120.9,
+            "units": "hours"
+          }
+        }
+      ],
+      "recommendations": [
+        {
+          "actionId": "action-9h0i1j",
+          "priority": "CRITICAL",
+          "description": "Immediate notification to ISS and all international partners",
+          "timeline": "IMMEDIATE"
+        },
+        {
+          "actionId": "action-2k3l4m",
+          "priority": "CRITICAL",
+          "description": "Prepare emergency ISS debris avoidance maneuver",
+          "timeline": "WITHIN_24_HOURS"
+        },
+        {
+          "actionId": "action-5n6o7p",
+          "priority": "HIGH",
+          "description": "Prepare crew for potential Soyuz shelter",
+          "timeline": "WITHIN_72_HOURS"
+        },
+        {
+          "actionId": "action-8q9r0s",
+          "priority": "HIGH",
+          "description": "Activate diplomatic channels for attribution and protest",
+          "timeline": "WITHIN_24_HOURS"
+        }
+      ],
+      "timeline": {
+        "detectionTime": "2023-10-15T15:48:56.789Z",
+        "assessmentTime": "2023-10-15T19:35:56.789Z",
+        "projectedTimeToAction": {
+          "value": 12,
+          "units": "hours"
+        },
+        "timeToImpact": {
+          "value": 120.9,
+          "units": "hours"
+        }
+      },
+      "metadata": {
+        "analysisVersion": "2.3.1",
+        "analystId": "ANALYST-JD42",
+        "reviewStatus": "HUMAN_REVIEWED",
+        "reviewerId": "SUPERVISOR-MK19",
+        "classification": "TOP_SECRET",
+        "escalationLevel": "NATIONAL_COMMAND_AUTHORITY"
+      },
+      "noradId": 48274
+    }
+  }
+] 

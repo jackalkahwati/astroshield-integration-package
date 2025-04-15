@@ -1,0 +1,247 @@
+[
+  {
+    "header": {
+      "messageId": "conj-8a23b917-4d65-48ef-9c31-7a2b4e8d91f5",
+      "timestamp": "2023-10-15T15:45:12.783Z",
+      "source": "ss5_hostility_monitoring",
+      "messageType": "ss5.conjunction.event",
+      "traceId": "trace-f7a1e4d9-6c38-4b25-a971-5e84f2c31a9d",
+      "parentMessageIds": [
+        "sv-28f3e714-37d3-4fb9-8f3c-dfc8933d721f",
+        "sv-7bc9e416-23a1-49d9-98d5-463abf1e5924"
+      ]
+    },
+    "payload": {
+      "conjunctionId": "conj-8a23b917-4d65-48ef-9c31-7a2b4e8d91f5",
+      "detectionTime": "2023-10-15T15:45:12.783Z",
+      "primaryObject": {
+        "objectId": "SATCAT-25544",
+        "noradId": 25544,
+        "objectName": "ISS (ZARYA)",
+        "stateVectorId": "sv-28f3e714-37d3-4fb9-8f3c-dfc8933d721f"
+      },
+      "secondaryObject": {
+        "objectId": "SATCAT-43013",
+        "noradId": 43013,
+        "objectName": "STARLINK-1047",
+        "stateVectorId": "sv-7bc9e416-23a1-49d9-98d5-463abf1e5924"
+      },
+      "timeOfClosestApproach": "2023-10-17T08:23:45.000Z",
+      "missDistance": {
+        "value": 14.3,
+        "units": "km"
+      },
+      "relativeVelocity": {
+        "value": 12.5,
+        "units": "km/s"
+      },
+      "probabilityOfCollision": 1.2e-5,
+      "riskLevel": "HIGH",
+      "riskAssessment": {
+        "impactEnergy": {
+          "value": 45.7,
+          "units": "kJ"
+        },
+        "expectedDebrisCount": 487,
+        "consequenceRating": "SEVERE"
+      },
+      "timeToClosestApproach": {
+        "value": 40.6,
+        "units": "hours"
+      },
+      "mitigationOptions": [
+        {
+          "optionId": "mit-1a",
+          "description": "ISS perform avoidance maneuver",
+          "deltaV": 0.12,
+          "executionTime": "2023-10-16T12:00:00.000Z"
+        },
+        {
+          "optionId": "mit-1b",
+          "description": "Request Starlink maneuver",
+          "notes": "Coordination with SpaceX required"
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "messageId": "conj-3f5a92e1-7d48-4b9c-a65e-8d4f2a3c1e7b",
+      "timestamp": "2023-10-15T15:46:23.456Z",
+      "source": "ss5_hostility_monitoring",
+      "messageType": "ss5.conjunction.event",
+      "traceId": "trace-e2c17a9d-5b34-4f76-8d92-1e67a3b5c9d8",
+      "parentMessageIds": [
+        "sv-1aef5d23-9b71-42c8-8731-49cca137b521",
+        "sv-21c47e8a-9f36-4d12-b578-3a91e74f8c23"
+      ]
+    },
+    "payload": {
+      "conjunctionId": "conj-3f5a92e1-7d48-4b9c-a65e-8d4f2a3c1e7b",
+      "detectionTime": "2023-10-15T15:46:23.456Z",
+      "primaryObject": {
+        "objectId": "SATCAT-37849",
+        "noradId": 37849,
+        "objectName": "GOES-16",
+        "stateVectorId": "sv-1aef5d23-9b71-42c8-8731-49cca137b521"
+      },
+      "secondaryObject": {
+        "objectId": "SATCAT-39084",
+        "noradId": 39084,
+        "objectName": "USA-247 (WGS F5)",
+        "stateVectorId": "sv-21c47e8a-9f36-4d12-b578-3a91e74f8c23"
+      },
+      "timeOfClosestApproach": "2023-10-18T23:12:45.000Z",
+      "missDistance": {
+        "value": 32.7,
+        "units": "km"
+      },
+      "relativeVelocity": {
+        "value": 1.2,
+        "units": "km/s"
+      },
+      "probabilityOfCollision": 3.8e-6,
+      "riskLevel": "MEDIUM",
+      "riskAssessment": {
+        "impactEnergy": {
+          "value": 78.2,
+          "units": "kJ"
+        },
+        "expectedDebrisCount": 156,
+        "consequenceRating": "SIGNIFICANT"
+      },
+      "timeToClosestApproach": {
+        "value": 80.4,
+        "units": "hours"
+      },
+      "mitigationOptions": [
+        {
+          "optionId": "mit-2a",
+          "description": "GOES-16 perform stationkeeping adjustment",
+          "deltaV": 0.05,
+          "executionTime": "2023-10-17T10:00:00.000Z"
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "messageId": "conj-2d5e8f4a-9c31-4b76-a58d-2e7f9c4b8a3d",
+      "timestamp": "2023-10-15T15:47:45.123Z",
+      "source": "ss5_hostility_monitoring",
+      "messageType": "ss5.conjunction.event",
+      "traceId": "trace-d9c47e2a-8b5f-4c31-9e76-2a4d8f3e1c7b",
+      "parentMessageIds": [
+        "sv-6f28d93a-42e5-48b2-a792-783c19ef4d65",
+        "sv-7bc9e416-23a1-49d9-98d5-463abf1e5924"
+      ]
+    },
+    "payload": {
+      "conjunctionId": "conj-2d5e8f4a-9c31-4b76-a58d-2e7f9c4b8a3d",
+      "detectionTime": "2023-10-15T15:47:45.123Z",
+      "primaryObject": {
+        "objectId": "SATCAT-48274",
+        "noradId": 48274,
+        "objectName": "UNKNOWN OBJECT",
+        "stateVectorId": "sv-6f28d93a-42e5-48b2-a792-783c19ef4d65"
+      },
+      "secondaryObject": {
+        "objectId": "SATCAT-43013",
+        "noradId": 43013,
+        "objectName": "STARLINK-1047",
+        "stateVectorId": "sv-7bc9e416-23a1-49d9-98d5-463abf1e5924"
+      },
+      "timeOfClosestApproach": "2023-10-16T04:18:22.000Z",
+      "missDistance": {
+        "value": 28.9,
+        "units": "km"
+      },
+      "relativeVelocity": {
+        "value": 10.2,
+        "units": "km/s"
+      },
+      "probabilityOfCollision": 5.7e-7,
+      "riskLevel": "LOW",
+      "riskAssessment": {
+        "impactEnergy": {
+          "value": 12.4,
+          "units": "kJ"
+        },
+        "expectedDebrisCount": 23,
+        "consequenceRating": "MINOR"
+      },
+      "timeToClosestApproach": {
+        "value": 12.5,
+        "units": "hours"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "conj-5a7d9f3b-2e6c-4a57-b82d-1f4e8c3a7d9e",
+      "timestamp": "2023-10-15T15:48:56.789Z",
+      "source": "ss5_hostility_monitoring",
+      "messageType": "ss5.conjunction.event",
+      "traceId": "trace-b8c2d7a6-4f3e-5c91-8d27-3a6b5c4d8e9f",
+      "parentMessageIds": [
+        "sv-28f3e714-37d3-4fb9-8f3c-dfc8933d721f",
+        "sv-6f28d93a-42e5-48b2-a792-783c19ef4d65"
+      ]
+    },
+    "payload": {
+      "conjunctionId": "conj-5a7d9f3b-2e6c-4a57-b82d-1f4e8c3a7d9e",
+      "detectionTime": "2023-10-15T15:48:56.789Z",
+      "primaryObject": {
+        "objectId": "SATCAT-25544",
+        "noradId": 25544,
+        "objectName": "ISS (ZARYA)",
+        "stateVectorId": "sv-28f3e714-37d3-4fb9-8f3c-dfc8933d721f"
+      },
+      "secondaryObject": {
+        "objectId": "SATCAT-48274",
+        "noradId": 48274,
+        "objectName": "UNKNOWN OBJECT",
+        "stateVectorId": "sv-6f28d93a-42e5-48b2-a792-783c19ef4d65"
+      },
+      "timeOfClosestApproach": "2023-10-20T16:42:18.000Z",
+      "missDistance": {
+        "value": 1.5,
+        "units": "km"
+      },
+      "relativeVelocity": {
+        "value": 15.3,
+        "units": "km/s"
+      },
+      "probabilityOfCollision": 2.8e-4,
+      "riskLevel": "CRITICAL",
+      "riskAssessment": {
+        "impactEnergy": {
+          "value": 123.7,
+          "units": "kJ"
+        },
+        "expectedDebrisCount": 782,
+        "consequenceRating": "CATASTROPHIC",
+        "threatToHumanLife": true
+      },
+      "timeToClosestApproach": {
+        "value": 120.9,
+        "units": "hours"
+      },
+      "mitigationOptions": [
+        {
+          "optionId": "mit-3a",
+          "description": "Emergency ISS debris avoidance maneuver",
+          "deltaV": 0.5,
+          "executionTime": "2023-10-18T14:00:00.000Z",
+          "priority": "URGENT"
+        },
+        {
+          "optionId": "mit-3b",
+          "description": "Crew shelter in Soyuz",
+          "executionTime": "2023-10-20T16:00:00.000Z"
+        }
+      ],
+      "additionalNotes": "Critical conjunction requiring immediate attention and coordination with international partners."
+    }
+  }
+] 

@@ -1,0 +1,312 @@
+[
+  {
+    "header": {
+      "messageId": "lnch-9a8b7c6d-5e4f-3g2h-1i0j-9k8l7m6n5o4p",
+      "timestamp": "2023-10-14T08:23:45.123Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.launch.detection",
+      "traceId": "trace-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+    },
+    "payload": {
+      "detectionId": "lnch-9a8b7c6d-5e4f-3g2h-1i0j-9k8l7m6n5o4p",
+      "detectionTime": "2023-10-14T08:23:45.123Z",
+      "launchSite": {
+        "name": "Baikonur Cosmodrome",
+        "country": "Kazakhstan",
+        "coordinates": {
+          "latitude": 45.9644,
+          "longitude": 63.3052,
+          "altitude": 90.0
+        }
+      },
+      "launchVehicle": {
+        "type": "Soyuz-2.1a",
+        "configuration": "WITH_FREGAT",
+        "confidence": 0.95
+      },
+      "launchTime": {
+        "estimated": "2023-10-14T08:20:12.000Z",
+        "confidence": 0.98
+      },
+      "trajectory": {
+        "initialAzimuth": 61.2,
+        "initialElevation": 87.5,
+        "estimatedStages": 3,
+        "estimatedPayloadCount": 1
+      },
+      "detectionMethod": {
+        "primary": "INFRARED",
+        "supporting": ["RADAR", "ELECTRO_OPTICAL"]
+      },
+      "predictedTargetOrbit": {
+        "type": "LEO",
+        "semiMajorAxis": 6778.0,
+        "eccentricity": 0.0015,
+        "inclination": 51.6,
+        "raan": 118.2,
+        "argumentOfPerigee": 235.7
+      },
+      "assessedPurpose": {
+        "category": "CREWED_MISSION",
+        "description": "Soyuz MS mission to ISS",
+        "confidence": 0.98
+      },
+      "relatedObjects": [
+        {
+          "objectId": "SATCAT-25544",
+          "noradId": 25544,
+          "objectName": "ISS (ZARYA)",
+          "relationship": "DESTINATION"
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "messageId": "lnch-5q4r3s2t-1u0v-9w8x-7y6z-5a4b3c2d1e0f",
+      "timestamp": "2023-10-15T11:42:18.456Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.launch.detection",
+      "traceId": "trace-7g8h9i0j-1k2l-3m4n-5o6p-7q8r9s0t1u2v"
+    },
+    "payload": {
+      "detectionId": "lnch-5q4r3s2t-1u0v-9w8x-7y6z-5a4b3c2d1e0f",
+      "detectionTime": "2023-10-15T11:42:18.456Z",
+      "launchSite": {
+        "name": "Vandenberg SFB",
+        "country": "United States",
+        "coordinates": {
+          "latitude": 34.7420,
+          "longitude": -120.5724,
+          "altitude": 100.0
+        }
+      },
+      "launchVehicle": {
+        "type": "Falcon 9",
+        "configuration": "BLOCK_5",
+        "confidence": 0.97
+      },
+      "launchTime": {
+        "estimated": "2023-10-15T11:40:00.000Z",
+        "confidence": 0.99
+      },
+      "trajectory": {
+        "initialAzimuth": 182.5,
+        "initialElevation": 85.7,
+        "estimatedStages": 2,
+        "estimatedPayloadCount": 46
+      },
+      "detectionMethod": {
+        "primary": "RADAR",
+        "supporting": ["INFRARED", "VISUAL"]
+      },
+      "predictedTargetOrbit": {
+        "type": "LEO",
+        "semiMajorAxis": 6928.0,
+        "eccentricity": 0.0002,
+        "inclination": 97.6,
+        "raan": 220.4,
+        "argumentOfPerigee": 179.8
+      },
+      "assessedPurpose": {
+        "category": "COMMERCIAL_SATELLITE_DEPLOYMENT",
+        "description": "Starlink satellite constellation deployment",
+        "confidence": 0.99
+      },
+      "relatedObjects": [
+        {
+          "objectId": "SATCAT-43013",
+          "noradId": 43013,
+          "objectName": "STARLINK-1047",
+          "relationship": "SIMILAR_DEPLOYMENT"
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "messageId": "lnch-3v4w5x6y-7z8a-9b0c-1d2e-3f4g5h6i7j8k",
+      "timestamp": "2023-10-16T03:15:22.789Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.launch.detection",
+      "traceId": "trace-9l0m1n2o-3p4q-5r6s-7t8u-9v0w1x2y3z4a"
+    },
+    "payload": {
+      "detectionId": "lnch-3v4w5x6y-7z8a-9b0c-1d2e-3f4g5h6i7j8k",
+      "detectionTime": "2023-10-16T03:15:22.789Z",
+      "launchSite": {
+        "name": "Jiuquan Satellite Launch Center",
+        "country": "China",
+        "coordinates": {
+          "latitude": 40.9608,
+          "longitude": 100.2979,
+          "altitude": 1000.0
+        }
+      },
+      "launchVehicle": {
+        "type": "Long March 2F",
+        "configuration": "STANDARD",
+        "confidence": 0.92
+      },
+      "launchTime": {
+        "estimated": "2023-10-16T03:12:00.000Z",
+        "confidence": 0.95
+      },
+      "trajectory": {
+        "initialAzimuth": 75.8,
+        "initialElevation": 86.3,
+        "estimatedStages": 2,
+        "estimatedPayloadCount": 1
+      },
+      "detectionMethod": {
+        "primary": "ELECTRO_OPTICAL",
+        "supporting": ["INFRARED", "RADAR"]
+      },
+      "predictedTargetOrbit": {
+        "type": "LEO",
+        "semiMajorAxis": 6768.0,
+        "eccentricity": 0.0011,
+        "inclination": 42.8,
+        "raan": 287.1,
+        "argumentOfPerigee": 201.3
+      },
+      "assessedPurpose": {
+        "category": "UNKNOWN",
+        "description": "Possible military reconnaissance satellite",
+        "confidence": 0.68
+      },
+      "relatedObjects": [
+        {
+          "objectId": "SATCAT-48274",
+          "noradId": 48274,
+          "objectName": "UNKNOWN OBJECT",
+          "relationship": "POSSIBLE_MISSION_SIMILARITY"
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "messageId": "lnch-1b2c3d4e-5f6g-7h8i-9j0k-1l2m3n4o5p6q",
+      "timestamp": "2023-10-17T19:28:55.012Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.launch.detection",
+      "traceId": "trace-5b6c7d8e-9f0g-1h2i-3j4k-5l6m7n8o9p0q"
+    },
+    "payload": {
+      "detectionId": "lnch-1b2c3d4e-5f6g-7h8i-9j0k-1l2m3n4o5p6q",
+      "detectionTime": "2023-10-17T19:28:55.012Z",
+      "launchSite": {
+        "name": "Cape Canaveral SFS",
+        "country": "United States",
+        "coordinates": {
+          "latitude": 28.5618,
+          "longitude": -80.5772,
+          "altitude": 10.0
+        }
+      },
+      "launchVehicle": {
+        "type": "Delta IV Heavy",
+        "configuration": "STANDARD",
+        "confidence": 0.97
+      },
+      "launchTime": {
+        "estimated": "2023-10-17T19:25:00.000Z",
+        "confidence": 0.99
+      },
+      "trajectory": {
+        "initialAzimuth": 95.2,
+        "initialElevation": 82.8,
+        "estimatedStages": 3,
+        "estimatedPayloadCount": 1
+      },
+      "detectionMethod": {
+        "primary": "VISUAL",
+        "supporting": ["RADAR", "INFRARED"]
+      },
+      "predictedTargetOrbit": {
+        "type": "GEO",
+        "semiMajorAxis": 42164.0,
+        "eccentricity": 0.0003,
+        "inclination": 0.1,
+        "raan": 95.3,
+        "argumentOfPerigee": 180.1
+      },
+      "assessedPurpose": {
+        "category": "MILITARY_COMMUNICATIONS",
+        "description": "Likely WGS series satellite",
+        "confidence": 0.89
+      },
+      "relatedObjects": [
+        {
+          "objectId": "SATCAT-39084",
+          "noradId": 39084,
+          "objectName": "USA-247 (WGS F5)",
+          "relationship": "SIMILAR_SERIES"
+        }
+      ]
+    }
+  },
+  {
+    "header": {
+      "messageId": "lnch-7r8s9t0u-1v2w-3x4y-5z6a-7b8c9d0e1f2g",
+      "timestamp": "2023-10-18T14:52:37.456Z",
+      "source": "ss0_data_ingestion",
+      "messageType": "ss0.launch.detection",
+      "traceId": "trace-3h4i5j6k-7l8m-9n0o-1p2q-3r4s5t6u7v8w"
+    },
+    "payload": {
+      "detectionId": "lnch-7r8s9t0u-1v2w-3x4y-5z6a-7b8c9d0e1f2g",
+      "detectionTime": "2023-10-18T14:52:37.456Z",
+      "launchSite": {
+        "name": "Kourou Space Centre",
+        "country": "French Guiana",
+        "coordinates": {
+          "latitude": 5.2368,
+          "longitude": -52.7693,
+          "altitude": 10.0
+        }
+      },
+      "launchVehicle": {
+        "type": "Ariane 5",
+        "configuration": "ECA",
+        "confidence": 0.96
+      },
+      "launchTime": {
+        "estimated": "2023-10-18T14:50:00.000Z",
+        "confidence": 0.97
+      },
+      "trajectory": {
+        "initialAzimuth": 102.5,
+        "initialElevation": 84.7,
+        "estimatedStages": 2,
+        "estimatedPayloadCount": 2
+      },
+      "detectionMethod": {
+        "primary": "RADAR",
+        "supporting": ["VISUAL", "INFRARED"]
+      },
+      "predictedTargetOrbit": {
+        "type": "GTO",
+        "semiMajorAxis": 24582.0,
+        "eccentricity": 0.7285,
+        "inclination": 3.5,
+        "raan": 183.6,
+        "argumentOfPerigee": 178.4
+      },
+      "assessedPurpose": {
+        "category": "COMMERCIAL_COMMUNICATIONS",
+        "description": "Dual communications satellite launch",
+        "confidence": 0.95
+      },
+      "relatedObjects": [
+        {
+          "objectId": "SATCAT-37849",
+          "noradId": 37849,
+          "objectName": "GOES-16",
+          "relationship": "SIMILAR_SIZE_CLASS"
+        }
+      ]
+    }
+  }
+] 

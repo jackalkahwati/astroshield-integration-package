@@ -1,0 +1,528 @@
+[
+  {
+    "header": {
+      "messageId": "resp-7d8e9f0a-1b2c-3d4e-5f6g-7h8i9j0k1l2m",
+      "timestamp": "2023-10-15T16:35:22.456Z",
+      "source": "ss6_response_recommendation",
+      "messageType": "ss6.response-recommendation.on-orbit",
+      "traceId": "trace-8d7f6e5c-4b3a-2d1e-9f8c-7b6a5d4c3e2b",
+      "parentMessageIds": [
+        "ccdm-9f2e8d7c-3b5a-48f1-a9e5-7d3c2b1f8e4a"
+      ]
+    },
+    "payload": {
+      "recommendationId": "resp-7d8e9f0a-1b2c-3d4e-5f6g-7h8i9j0k1l2m",
+      "generationTime": "2023-10-15T16:35:22.456Z",
+      "objectId": "SATCAT-43013",
+      "noradId": 43013,
+      "objectName": "STARLINK-1047",
+      "threatLevel": "NONE",
+      "confidence": 0.97,
+      "assessmentSummary": "Routine station keeping maneuver for known commercial satellite.",
+      "source": {
+        "detectionId": "ccdm-9f2e8d7c-3b5a-48f1-a9e5-7d3c2b1f8e4a",
+        "detectionType": "MANEUVERING"
+      },
+      "supportingEvidence": [
+        "Maneuver matches historical patterns for this constellation",
+        "Delta-V magnitude consistent with station keeping",
+        "Maneuver timing aligns with scheduled maintenance window"
+      ],
+      "courseOfAction": {
+        "recommendedAction": "MONITOR",
+        "priority": "LOW",
+        "timeline": "ROUTINE",
+        "actionSteps": [
+          {
+            "step": 1,
+            "description": "Continue standard monitoring",
+            "deadline": null,
+            "resources": ["AUTOMATED_TRACKING"]
+          }
+        ],
+        "rationale": "Normal spacecraft operations do not require intervention"
+      },
+      "alternativeCOAs": [],
+      "ttps": [],
+      "stakeholders": [
+        {
+          "organization": "SPACE TRAFFIC MANAGEMENT",
+          "notificationLevel": "ROUTINE_LOG"
+        }
+      ],
+      "decisionSupportInfo": {
+        "timeToAction": null,
+        "reviewStatus": "AUTOMATED",
+        "reviewPriority": "LOW"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "resp-3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d",
+      "timestamp": "2023-10-15T17:25:12.789Z",
+      "source": "ss6_response_recommendation",
+      "messageType": "ss6.response-recommendation.on-orbit",
+      "traceId": "trace-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "parentMessageIds": [
+        "ccdm-3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d"
+      ]
+    },
+    "payload": {
+      "recommendationId": "resp-3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d",
+      "generationTime": "2023-10-15T17:25:12.789Z",
+      "objectId": "SATCAT-39084",
+      "noradId": 39084,
+      "objectName": "USA-247 (WGS F5)",
+      "threatLevel": "MODERATE",
+      "confidence": 0.85,
+      "assessmentSummary": "Military satellite exhibiting unusual signature reduction behavior inconsistent with its mission profile.",
+      "source": {
+        "detectionId": "ccdm-3a4b5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d",
+        "detectionType": "CAMOUFLAGE"
+      },
+      "supportingEvidence": [
+        "Significant reduction in radar cross-section",
+        "Optical signature diminished beyond operational requirements",
+        "No scheduled testing or exercises reported"
+      ],
+      "courseOfAction": {
+        "recommendedAction": "ENHANCE_MONITORING",
+        "priority": "MEDIUM",
+        "timeline": "NEAR_TERM",
+        "actionSteps": [
+          {
+            "step": 1,
+            "description": "Increase sensor tasking on target",
+            "deadline": "2023-10-15T19:00:00.000Z",
+            "resources": ["RADAR-05", "OPTICAL-12"]
+          },
+          {
+            "step": 2,
+            "description": "Request additional information through intelligence channels",
+            "deadline": "2023-10-16T12:00:00.000Z",
+            "resources": ["INTELLIGENCE_LIAISON"]
+          },
+          {
+            "step": 3,
+            "description": "Generate SIGINT collection request",
+            "deadline": "2023-10-16T17:00:00.000Z",
+            "resources": ["SIGNALS_COLLECTION"]
+          }
+        ],
+        "rationale": "Unusual behavior warrants increased intelligence collection and monitoring"
+      },
+      "alternativeCOAs": [
+        {
+          "action": "STANDARD_MONITORING",
+          "rationale": "Possible testing of new capabilities as part of normal operations",
+          "priority": "LOW"
+        },
+        {
+          "action": "DIPLOMATIC_INQUIRY",
+          "rationale": "Unusual behavior may justify formal query through established channels",
+          "priority": "MEDIUM",
+          "timeline": "DAYS"
+        }
+      ],
+      "ttps": [
+        {
+          "ttpId": "TTP-MONITOR-STEALTH-001",
+          "name": "Enhanced RF and Optical Monitoring Protocol",
+          "description": "Multi-sensor fusion approach to track low-observable space objects",
+          "reference": "SOP-342-B"
+        }
+      ],
+      "stakeholders": [
+        {
+          "organization": "SPACE COMMAND",
+          "notificationLevel": "PRIORITY_ALERT"
+        },
+        {
+          "organization": "INTELLIGENCE COMMUNITY",
+          "notificationLevel": "IMMEDIATE_NOTIFICATION"
+        }
+      ],
+      "decisionSupportInfo": {
+        "timeToAction": {
+          "value": 6,
+          "units": "hours"
+        },
+        "reviewStatus": "PENDING_HUMAN_REVIEW",
+        "reviewPriority": "MEDIUM",
+        "classification": "SECRET"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "resp-5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b",
+      "timestamp": "2023-10-15T18:14:03.456Z",
+      "source": "ss6_response_recommendation",
+      "messageType": "ss6.response-recommendation.on-orbit",
+      "traceId": "trace-7e8f9a0b-1c2d-3e4f-5a6b-7c8d9e0f1a2b",
+      "parentMessageIds": [
+        "ccdm-5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b"
+      ]
+    },
+    "payload": {
+      "recommendationId": "resp-5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b",
+      "generationTime": "2023-10-15T18:14:03.456Z",
+      "objectId": "SATCAT-48274",
+      "noradId": 48274,
+      "objectName": "UNKNOWN OBJECT",
+      "threatLevel": "HIGH",
+      "confidence": 0.91,
+      "assessmentSummary": "Unknown object engaged in deliberate identity spoofing while demonstrating capabilities inconsistent with debris.",
+      "source": {
+        "detectionId": "ccdm-5e6f7a8b-9c0d-1e2f-3a4b-5c6d7e8f9a0b",
+        "detectionType": "DECEPTION"
+      },
+      "supportingEvidence": [
+        "Broadcasting false NORAD ID of known debris",
+        "Controlled maneuvers inconsistent with debris characteristics",
+        "RF emissions matching patterns of active satellites"
+      ],
+      "courseOfAction": {
+        "recommendedAction": "ACTIVATE_DEFENSIVE_POSTURE",
+        "priority": "HIGH",
+        "timeline": "IMMEDIATE",
+        "actionSteps": [
+          {
+            "step": 1,
+            "description": "Activate continuous tracking with all available sensors",
+            "deadline": "2023-10-15T18:30:00.000Z",
+            "resources": ["RADAR-05", "OPTICAL-12", "SPACE-SBV-1"]
+          },
+          {
+            "step": 2,
+            "description": "Notify high-value asset operators of potential threat",
+            "deadline": "2023-10-15T19:00:00.000Z",
+            "resources": ["EMERGENCY_NOTIFICATION_SYSTEM"]
+          },
+          {
+            "step": 3,
+            "description": "Prepare defensive maneuver options for critical assets",
+            "deadline": "2023-10-15T20:00:00.000Z",
+            "resources": ["SPACE_TRAFFIC_MANAGEMENT", "DEFENSIVE_OPERATIONS"]
+          },
+          {
+            "step": 4,
+            "description": "Conduct full spectrum intelligence collection",
+            "deadline": "2023-10-15T22:00:00.000Z",
+            "resources": ["ALL_SOURCE_COLLECTION"]
+          }
+        ],
+        "rationale": "Object demonstrates clear hostile intent through deliberate deception"
+      },
+      "alternativeCOAs": [
+        {
+          "action": "ENHANCED_MONITORING",
+          "rationale": "Continue observation to gather more data before escalating",
+          "priority": "MEDIUM"
+        },
+        {
+          "action": "DIPLOMATIC_DEMARCHE",
+          "rationale": "Issue formal diplomatic protest to suspected operating nation",
+          "priority": "HIGH",
+          "timeline": "HOURS"
+        }
+      ],
+      "ttps": [
+        {
+          "ttpId": "TTP-DECEIVER-RESPONSE-003",
+          "name": "Counter-Deception Operations Protocol",
+          "description": "Integrated response to space-based deception operations",
+          "reference": "SOP-671-C"
+        },
+        {
+          "ttpId": "TTP-ASSET-PROTECTION-012",
+          "name": "Critical Asset Defense Measures",
+          "description": "Procedures for protecting high-value space assets from threats",
+          "reference": "SOP-129-A"
+        }
+      ],
+      "stakeholders": [
+        {
+          "organization": "NATIONAL COMMAND AUTHORITY",
+          "notificationLevel": "IMMEDIATE_NOTIFICATION"
+        },
+        {
+          "organization": "SPACE DEFENSE OPERATIONS",
+          "notificationLevel": "EMERGENCY_ALERT"
+        },
+        {
+          "organization": "INTELLIGENCE COMMUNITY",
+          "notificationLevel": "FLASH_PRIORITY"
+        }
+      ],
+      "decisionSupportInfo": {
+        "timeToAction": {
+          "value": 1,
+          "units": "hours"
+        },
+        "reviewStatus": "PENDING_HUMAN_REVIEW",
+        "reviewPriority": "URGENT",
+        "classification": "TOP_SECRET"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "resp-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "timestamp": "2023-10-15T19:07:18.789Z",
+      "source": "ss6_response_recommendation",
+      "messageType": "ss6.response-recommendation.on-orbit",
+      "traceId": "trace-3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      "parentMessageIds": [
+        "ccdm-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d"
+      ]
+    },
+    "payload": {
+      "recommendationId": "resp-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "generationTime": "2023-10-15T19:07:18.789Z",
+      "objectId": "SATCAT-37849",
+      "noradId": 37849,
+      "objectName": "GOES-16",
+      "threatLevel": "MODERATE",
+      "confidence": 0.74,
+      "assessmentSummary": "Weather satellite potentially conducted undisclosed activity during sensor coverage gap.",
+      "source": {
+        "detectionId": "ccdm-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+        "detectionType": "CONCEALMENT"
+      },
+      "supportingEvidence": [
+        "Activity timed to coincide with known sensor coverage gap",
+        "Minor changes in orbit parameters after coverage resumed",
+        "Unexplained thermal signature fluctuations"
+      ],
+      "courseOfAction": {
+        "recommendedAction": "INVESTIGATE",
+        "priority": "MEDIUM",
+        "timeline": "NEAR_TERM",
+        "actionSteps": [
+          {
+            "step": 1,
+            "description": "Request operational information from NOAA via formal channels",
+            "deadline": "2023-10-16T12:00:00.000Z",
+            "resources": ["INTERAGENCY_LIAISON"]
+          },
+          {
+            "step": 2,
+            "description": "Deploy additional sensors to search for possible secondary object",
+            "deadline": "2023-10-16T14:00:00.000Z",
+            "resources": ["OPTICAL-12", "SPACE-SBV-1"]
+          },
+          {
+            "step": 3,
+            "description": "Analyze historical data for similar patterns during coverage gaps",
+            "deadline": "2023-10-17T12:00:00.000Z",
+            "resources": ["DATA_ANALYTICS_TEAM"]
+          }
+        ],
+        "rationale": "Activity requires verification and could indicate undisclosed capabilities"
+      },
+      "alternativeCOAs": [
+        {
+          "action": "STANDARD_MONITORING",
+          "rationale": "Activity may be part of normal operations not properly coordinated",
+          "priority": "LOW"
+        }
+      ],
+      "ttps": [
+        {
+          "ttpId": "TTP-COVERAGE-GAP-MITIGATION-005",
+          "name": "Sensor Coverage Gap Mitigation",
+          "description": "Procedures for detecting activities during known coverage gaps",
+          "reference": "SOP-283-B"
+        }
+      ],
+      "stakeholders": [
+        {
+          "organization": "SPACE DOMAIN AWARENESS",
+          "notificationLevel": "STANDARD_NOTIFICATION"
+        },
+        {
+          "organization": "SATELLITE OPERATIONS CENTER",
+          "notificationLevel": "INFORMATIONAL"
+        }
+      ],
+      "decisionSupportInfo": {
+        "timeToAction": {
+          "value": 12,
+          "units": "hours"
+        },
+        "reviewStatus": "PENDING_HUMAN_REVIEW",
+        "reviewPriority": "MEDIUM",
+        "classification": "SECRET"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "resp-9m8n7o6p-5q4r-3s2t-1u0v-9w8x7y6z5a4b",
+      "timestamp": "2023-10-14T08:30:45.123Z",
+      "source": "ss6_response_recommendation",
+      "messageType": "ss6.response-recommendation.launch",
+      "traceId": "trace-1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "parentMessageIds": [
+        "lnch-9a8b7c6d-5e4f-3g2h-1i0j-9k8l7m6n5o4p"
+      ]
+    },
+    "payload": {
+      "recommendationId": "resp-9m8n7o6p-5q4r-3s2t-1u0v-9w8x7y6z5a4b",
+      "generationTime": "2023-10-14T08:30:45.123Z",
+      "launchAssessment": {
+        "launchId": "lnch-9a8b7c6d-5e4f-3g2h-1i0j-9k8l7m6n5o4p",
+        "launchSite": "Baikonur Cosmodrome",
+        "launchTime": "2023-10-14T08:20:12.000Z",
+        "launchVehicle": "Soyuz-2.1a",
+        "assessedPurpose": "CREWED_MISSION"
+      },
+      "threatLevel": "NONE",
+      "confidence": 0.98,
+      "assessmentSummary": "Scheduled Soyuz crewed launch to ISS with appropriate notifications.",
+      "courseOfAction": {
+        "recommendedAction": "ROUTINE_MONITORING",
+        "priority": "LOW",
+        "timeline": "ROUTINE",
+        "actionSteps": [
+          {
+            "step": 1,
+            "description": "Track through standard space surveillance network",
+            "deadline": null,
+            "resources": ["AUTOMATED_TRACKING"]
+          },
+          {
+            "step": 2,
+            "description": "Log in catalog as known ISS mission",
+            "deadline": "2023-10-14T16:00:00.000Z",
+            "resources": ["CATALOG_MANAGEMENT"]
+          }
+        ],
+        "rationale": "Launch matches expected parameters for scheduled ISS crew rotation"
+      },
+      "alternativeCOAs": [],
+      "ttps": [],
+      "stakeholders": [
+        {
+          "organization": "SPACE TRAFFIC MANAGEMENT",
+          "notificationLevel": "INFORMATIONAL"
+        },
+        {
+          "organization": "NASA",
+          "notificationLevel": "STANDARD_NOTIFICATION"
+        }
+      ],
+      "decisionSupportInfo": {
+        "timeToAction": null,
+        "reviewStatus": "AUTOMATED",
+        "reviewPriority": "LOW",
+        "classification": "UNCLASSIFIED"
+      }
+    }
+  },
+  {
+    "header": {
+      "messageId": "resp-3f4g5h6i-7j8k-9l0m-1n2o-3p4q5r6s7t8u",
+      "timestamp": "2023-10-16T03:25:22.789Z",
+      "source": "ss6_response_recommendation",
+      "messageType": "ss6.response-recommendation.launch",
+      "traceId": "trace-9l0m1n2o-3p4q-5r6s-7t8u-9v0w1x2y3z4a",
+      "parentMessageIds": [
+        "lnch-3v4w5x6y-7z8a-9b0c-1d2e-3f4g5h6i7j8k"
+      ]
+    },
+    "payload": {
+      "recommendationId": "resp-3f4g5h6i-7j8k-9l0m-1n2o-3p4q5r6s7t8u",
+      "generationTime": "2023-10-16T03:25:22.789Z",
+      "launchAssessment": {
+        "launchId": "lnch-3v4w5x6y-7z8a-9b0c-1d2e-3f4g5h6i7j8k",
+        "launchSite": "Jiuquan Satellite Launch Center",
+        "launchTime": "2023-10-16T03:12:00.000Z",
+        "launchVehicle": "Long March 2F",
+        "assessedPurpose": "UNKNOWN"
+      },
+      "threatLevel": "MODERATE",
+      "confidence": 0.68,
+      "assessmentSummary": "Unannounced launch with characteristics consistent with reconnaissance satellite.",
+      "courseOfAction": {
+        "recommendedAction": "ENHANCED_MONITORING",
+        "priority": "MEDIUM",
+        "timeline": "IMMEDIATE",
+        "actionSteps": [
+          {
+            "step": 1,
+            "description": "Task all available sensors to track and characterize payload",
+            "deadline": "2023-10-16T04:00:00.000Z",
+            "resources": ["RADAR-05", "OPTICAL-12", "SPACE-SBV-1"]
+          },
+          {
+            "step": 2,
+            "description": "Analyze initial orbital parameters and compare to known military satellites",
+            "deadline": "2023-10-16T05:30:00.000Z",
+            "resources": ["ORBITAL_ANALYSIS_TEAM"]
+          },
+          {
+            "step": 3,
+            "description": "Monitor for payload deployment or unusual maneuvers",
+            "deadline": "2023-10-16T15:00:00.000Z",
+            "resources": ["CONTINUOUS_TRACKING"]
+          },
+          {
+            "step": 4,
+            "description": "Generate intelligence report on payload capabilities",
+            "deadline": "2023-10-17T12:00:00.000Z",
+            "resources": ["INTELLIGENCE_ANALYSTS"]
+          }
+        ],
+        "rationale": "Unannounced military launch requires careful characterization and monitoring"
+      },
+      "alternativeCOAs": [
+        {
+          "action": "STANDARD_MONITORING",
+          "rationale": "May be civilian satellite despite lack of announcement",
+          "priority": "LOW"
+        },
+        {
+          "action": "ISSUE_DEMARCHE",
+          "rationale": "Protest lack of proper launch notification through diplomatic channels",
+          "priority": "MEDIUM",
+          "timeline": "DAYS"
+        }
+      ],
+      "ttps": [
+        {
+          "ttpId": "TTP-UNANNOUNCED-LAUNCH-004",
+          "name": "Unannounced Launch Monitoring Protocol",
+          "description": "Procedures for tracking and characterizing unannounced space launches",
+          "reference": "SOP-421-A"
+        }
+      ],
+      "stakeholders": [
+        {
+          "organization": "SPACE COMMAND",
+          "notificationLevel": "PRIORITY_ALERT"
+        },
+        {
+          "organization": "INTELLIGENCE COMMUNITY",
+          "notificationLevel": "IMMEDIATE_NOTIFICATION"
+        },
+        {
+          "organization": "NATIONAL SECURITY COUNCIL",
+          "notificationLevel": "STANDARD_NOTIFICATION"
+        }
+      ],
+      "decisionSupportInfo": {
+        "timeToAction": {
+          "value": 2,
+          "units": "hours"
+        },
+        "reviewStatus": "PENDING_HUMAN_REVIEW",
+        "reviewPriority": "HIGH",
+        "classification": "TOP_SECRET",
+        "escalationLevel": "NATIONAL_COMMAND_AUTHORITY"
+      }
+    }
+  }
+] 

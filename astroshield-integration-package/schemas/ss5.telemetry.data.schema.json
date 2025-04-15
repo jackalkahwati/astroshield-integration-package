@@ -1,0 +1,240 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://astroshield.com/schemas/ss5.telemetry.data.schema.json",
+  "title": "Spacecraft Telemetry Data",
+  "description": "Schema for telemetry data messages from spacecraft",
+  "type": "object",
+  "required": ["header", "payload"],
+  "properties": {
+    "header": {
+      "type": "object",
+      "description": "Message header containing metadata",
+      "required": ["messageId", "timestamp", "source", "messageType"],
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "Unique identifier for the message",
+          "format": "uuid"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Time when the message was generated",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "description": "System or component that generated the message"
+        },
+        "messageType": {
+          "type": "string",
+          "description": "Type of message",
+          "enum": ["telemetry.data"]
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Message payload containing telemetry data",
+      "required": ["spacecraftId", "timestamp", "subsystem", "measurements"],
+      "properties": {
+        "spacecraftId": {
+          "type": "string",
+          "description": "Identifier of the spacecraft"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Time when the telemetry data was collected",
+          "format": "date-time"
+        },
+        "subsystem": {
+          "type": "string",
+          "description": "Spacecraft subsystem that the telemetry data relates to",
+          "enum": ["power", "thermal", "attitude", "communications", "propulsion", "payload"]
+        },
+        "measurements": {
+          "type": "array",
+          "description": "List of telemetry measurements",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "value", "unit"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of the measurement"
+              },
+              "value": {
+                "type": ["number", "string"],
+                "description": "Value of the measurement"
+              },
+              "unit": {
+                "type": "string",
+                "description": "Unit of the measurement"
+              },
+              "nominal_range": {
+                "type": "object",
+                "description": "Nominal range for the measurement",
+                "properties": {
+                  "min": {
+                    "type": "number",
+                    "description": "Minimum nominal value"
+                  },
+                  "max": {
+                    "type": "number",
+                    "description": "Maximum nominal value"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "attitude": {
+          "type": "object",
+          "description": "Spacecraft attitude information",
+          "properties": {
+            "x": {
+              "type": ["number", "string"],
+              "description": "X-axis attitude value"
+            },
+            "y": {
+              "type": ["number", "string"],
+              "description": "Y-axis attitude value"
+            },
+            "z": {
+              "type": ["number", "string"],
+              "description": "Z-axis attitude value"
+            },
+            "unit": {
+              "type": "string",
+              "description": "Unit of attitude measurements",
+              "enum": ["degrees", "radians"]
+            }
+          }
+        },
+        "orbit": {
+          "type": "object",
+          "description": "Spacecraft orbit information",
+          "properties": {
+            "altitude": {
+              "type": "number",
+              "description": "Current altitude in kilometers"
+            },
+            "inclination": {
+              "type": "number",
+              "description": "Current inclination in degrees"
+            },
+            "eccentricity": {
+              "type": "number",
+              "description": "Current orbital eccentricity"
+            },
+            "period": {
+              "type": "number",
+              "description": "Orbital period in minutes"
+            }
+          }
+        },
+        "status": {
+          "type": "object",
+          "description": "Status information for the subsystem",
+          "required": ["overall"],
+          "properties": {
+            "overall": {
+              "type": "string",
+              "description": "Overall status of the subsystem",
+              "enum": ["NOMINAL", "WARNING", "CRITICAL", "UNKNOWN"]
+            },
+            "issues": {
+              "type": "array",
+              "description": "List of identified issues",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional metadata about the telemetry data",
+          "properties": {
+            "dataQuality": {
+              "type": "string",
+              "description": "Quality of the data",
+              "enum": ["HIGH", "MEDIUM", "LOW", "DEGRADED"]
+            },
+            "missionPhase": {
+              "type": "string",
+              "description": "Current mission phase"
+            },
+            "groundStation": {
+              "type": "string",
+              "description": "Ground station that received the telemetry"
+            },
+            "tags": {
+              "type": "array",
+              "description": "Tags associated with this telemetry data",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "header": {
+        "messageId": "550e8400-e29b-41d4-a716-446655440000",
+        "timestamp": "2023-05-01T12:00:00Z",
+        "source": "spacecraft-telemetry-system",
+        "messageType": "telemetry.data"
+      },
+      "payload": {
+        "spacecraftId": "SAT-123",
+        "timestamp": "2023-05-01T11:59:30Z",
+        "subsystem": "power",
+        "measurements": [
+          {
+            "name": "battery_level",
+            "value": 85.2,
+            "unit": "percent",
+            "nominal_range": {
+              "min": 20,
+              "max": 100
+            }
+          },
+          {
+            "name": "solar_panel_current",
+            "value": 4.7,
+            "unit": "ampere",
+            "nominal_range": {
+              "min": 0,
+              "max": 10
+            }
+          },
+          {
+            "name": "power_consumption",
+            "value": 120.5,
+            "unit": "watt"
+          }
+        ],
+        "attitude": {
+          "x": 45.2,
+          "y": 10.1,
+          "z": 270.5,
+          "unit": "degrees"
+        },
+        "status": {
+          "overall": "NOMINAL",
+          "issues": []
+        },
+        "metadata": {
+          "dataQuality": "HIGH",
+          "missionPhase": "OPERATIONAL",
+          "groundStation": "HOUSTON-01",
+          "tags": ["routine", "daily-check"]
+        }
+      }
+    }
+  ]
+} 
