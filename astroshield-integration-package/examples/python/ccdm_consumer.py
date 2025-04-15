@@ -43,6 +43,35 @@ def delivery_report(err, msg):
     else:
         logger.info(f"Message delivered to {msg.topic()} [{msg.partition()}] at offset {msg.offset()}")
 
+def create_standardized_message(payload, message_type, source, model_version=None, trace_id=None, parent_message_ids=None, confidence=None):
+    """
+    Create a standardized message envelope for Kafka topics.
+    Args:
+        payload (dict): The main payload for the message.
+        message_type (str): The type of message (e.g., 'threat.assessment').
+        source (str): The source system or module.
+        model_version (str, optional): The version of the model (for ML outputs).
+        trace_id (str, optional): Trace ID for lineage.
+        parent_message_ids (list, optional): Parent message IDs for traceability.
+        confidence (float, optional): Confidence score for predictions.
+    Returns:
+        dict: Standardized message with header and payload.
+    """
+    header = {
+        "messageId": str(uuid.uuid4()),
+        "timestamp": datetime.utcnow().isoformat(),
+        "source": source,
+        "messageType": message_type,
+        "traceId": trace_id or str(uuid.uuid4()),
+        "parentMessageIds": parent_message_ids or [],
+    }
+    if model_version:
+        header["model_version"] = model_version
+    # Optionally add confidence to payload if provided
+    if confidence is not None:
+        payload["confidence"] = confidence
+    return {"header": header, "payload": payload}
+
 def analyze_ccdm_detection(detection):
     """
     Analyze a CCDM detection and generate a threat assessment.
@@ -63,35 +92,33 @@ def analyze_ccdm_detection(detection):
             threat_level = "MEDIUM"
     
     # Generate a threat assessment
-    assessment = {
-        "header": {
-            "messageId": str(uuid.uuid4()),
-            "timestamp": datetime.utcnow().isoformat(),
-            "source": "ccdm-consumer-example",
-            "messageType": "threat.assessment",
-            "traceId": detection['header']['traceId'],
-            "parentMessageIds": [detection['header']['messageId']]
-        },
-        "payload": {
-            "assessmentId": str(uuid.uuid4()),
-            "objectId": object_id,
-            "assessmentTime": datetime.utcnow().isoformat(),
-            "threatLevel": threat_level,
-            "confidence": min(confidence + 0.1, 1.0),  # Slightly adjust confidence
-            "source": "CCDM_ANALYSIS",
-            "description": f"Threat assessment based on {ccdm_type} detection",
-            "relatedDetections": [
-                {
-                    "detectionId": detection['payload']['detectionId'],
-                    "detectionType": "CCDM",
-                    "weight": 1.0
-                }
-            ],
-            "recommendedActions": generate_recommendations(ccdm_type, threat_level)
-        }
+    assessment_payload = {
+        "assessmentId": str(uuid.uuid4()),
+        "objectId": object_id,
+        "assessmentTime": datetime.utcnow().isoformat(),
+        "threatLevel": threat_level,
+        "source": "CCDM_ANALYSIS",
+        "description": f"Threat assessment based on {ccdm_type} detection",
+        "relatedDetections": [
+            {
+                "detectionId": detection['payload']['detectionId'],
+                "detectionType": "CCDM",
+                "weight": 1.0
+            }
+        ],
+        "recommendedActions": generate_recommendations(ccdm_type, threat_level)
     }
     
-    return assessment
+    # Use the utility to create the standardized message
+    return create_standardized_message(
+        payload=assessment_payload,
+        message_type="threat.assessment",
+        source="ccdm-consumer-example",
+        model_version="ml-v1.0",  # Example version
+        trace_id=detection['header']['traceId'],
+        parent_message_ids=[detection['header']['messageId']],
+        confidence=min(confidence + 0.1, 1.0)
+    )
 
 def generate_recommendations(ccdm_type, threat_level):
     """Generate recommended actions based on CCDM type and threat level."""

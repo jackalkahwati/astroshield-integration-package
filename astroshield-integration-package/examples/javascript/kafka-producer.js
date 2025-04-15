@@ -95,45 +95,36 @@ function sendSampleMessages() {
  * @returns {Object} Sample telemetry message
  */
 function createSampleTelemetryMessage() {
-  // Generate a random spacecraft ID between 1 and 10
   const spacecraftId = Math.floor(Math.random() * 10) + 1;
-  
-  // Generate random values for telemetry data
   const batteryLevel = Math.random() * 100;
-  const temperature = 20 + (Math.random() * 30 - 15);  // Between 5 and 35 degrees
+  const temperature = 20 + (Math.random() * 30 - 15);
   const fuelLevel = Math.random() * 100;
   const attitudeX = Math.random() * 360;
   const attitudeY = Math.random() * 360;
   const attitudeZ = Math.random() * 360;
-  
-  // Create message
+  const messageId = uuidv4();
+  const traceId = uuidv4();
+  const parentMessageIds = [uuidv4()];
+  const modelVersion = 'ml-v1.0';
+  const confidence = Math.random();
   return {
     header: {
-      messageId: uuidv4(),
+      messageId,
       timestamp: new Date().toISOString(),
       source: 'example-producer',
-      messageType: 'telemetry.data'
+      messageType: 'telemetry.data',
+      traceId,
+      parentMessageIds,
+      model_version: modelVersion
     },
     payload: {
       spacecraftId: `SAT-${spacecraftId}`,
       timestamp: new Date().toISOString(),
       subsystem: 'power',
       measurements: [
-        {
-          name: 'battery_level',
-          value: batteryLevel.toFixed(2),
-          unit: 'percent'
-        },
-        {
-          name: 'temperature',
-          value: temperature.toFixed(2),
-          unit: 'celsius'
-        },
-        {
-          name: 'fuel_level',
-          value: fuelLevel.toFixed(2),
-          unit: 'percent'
-        }
+        { name: 'battery_level', value: batteryLevel.toFixed(2), unit: 'percent' },
+        { name: 'temperature', value: temperature.toFixed(2), unit: 'celsius' },
+        { name: 'fuel_level', value: fuelLevel.toFixed(2), unit: 'percent' }
       ],
       attitude: {
         x: attitudeX.toFixed(2),
@@ -144,7 +135,8 @@ function createSampleTelemetryMessage() {
       status: {
         overall: batteryLevel > 20 ? 'NOMINAL' : 'WARNING',
         issues: batteryLevel <= 20 ? ['LOW_BATTERY'] : []
-      }
+      },
+      confidence
     }
   };
 }

@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # Kafka and Zookeeper for messaging
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    container_name: astroshield-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+    ports:
+      - "2181:2181"
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "2181"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    container_name: astroshield-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Setup Kafka UI for monitoring
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: astroshield-kafka-ui
+    depends_on:
+      - kafka
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: astroshield-local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+
+  # Mock API service simulating the AstroShield API
+  mock-api:
+    image: node:16-alpine
+    container_name: astroshield-mock-api
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    ports:
+      - "3000:3000"
+    command: >
+      sh -c "npm install -g json-server &&
+             json-server --watch mock-api.json --port 3000 --host 0.0.0.0 --middlewares mock-api-middleware.js"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Schema registry for validation
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.3.0
+    container_name: astroshield-schema-registry
+    depends_on:
+      - kafka
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka:9092
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
+  # Message simulator to generate test messages
+  message-simulator:
+    image: python:3.9-slim
+    container_name: astroshield-simulator
+    volumes:
+      - ./sample_data:/data
+      - ./utils/simulator:/app
+    working_dir: /app
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SIMULATION_INTERVAL_MS: 10000
+    command: >
+      sh -c "pip install kafka-python && python simulator.py"
+
+volumes:
+  kafka-data:
+  zookeeper-data: 

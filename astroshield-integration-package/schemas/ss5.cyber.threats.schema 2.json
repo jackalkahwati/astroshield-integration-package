@@ -1,0 +1,367 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://astroshield.com/schemas/ss5.cyber.threats.schema.json",
+  "title": "Spacecraft Cyber Threat",
+  "description": "Schema for cyber threat messages related to spacecraft",
+  "type": "object",
+  "required": ["header", "payload"],
+  "properties": {
+    "header": {
+      "type": "object",
+      "description": "Message header containing metadata",
+      "required": ["messageId", "timestamp", "source", "messageType"],
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "Unique identifier for the message",
+          "format": "uuid"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Time when the message was generated",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "description": "System or component that generated the message"
+        },
+        "messageType": {
+          "type": "string",
+          "description": "Type of message",
+          "enum": ["cyber.threat"]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority level of the message",
+          "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Message payload containing cyber threat data",
+      "required": ["threatId", "spacecraftId", "detectionTime", "threatType", "severity"],
+      "properties": {
+        "threatId": {
+          "type": "string",
+          "description": "Unique identifier for the cyber threat"
+        },
+        "spacecraftId": {
+          "type": "string",
+          "description": "Identifier of the affected spacecraft"
+        },
+        "detectionTime": {
+          "type": "string",
+          "description": "Time when the threat was detected",
+          "format": "date-time"
+        },
+        "threatType": {
+          "type": "string",
+          "description": "Type of cyber threat",
+          "enum": [
+            "UNAUTHORIZED_ACCESS",
+            "COMMAND_INJECTION",
+            "DENIAL_OF_SERVICE",
+            "DATA_EXFILTRATION",
+            "MALWARE",
+            "SIGNAL_JAMMING",
+            "SPOOFING",
+            "MAN_IN_THE_MIDDLE",
+            "REPLAY_ATTACK",
+            "CRYPTOGRAPHIC_ATTACK",
+            "UNKNOWN"
+          ]
+        },
+        "severity": {
+          "type": "string",
+          "description": "Severity level of the threat",
+          "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the threat"
+        },
+        "affectedSystems": {
+          "type": "array",
+          "description": "List of spacecraft systems affected by the threat",
+          "items": {
+            "type": "string",
+            "enum": [
+              "COMMAND_AND_CONTROL",
+              "COMMUNICATIONS",
+              "POWER",
+              "PROPULSION",
+              "NAVIGATION",
+              "PAYLOAD",
+              "THERMAL",
+              "ATTITUDE_CONTROL",
+              "ONBOARD_COMPUTER",
+              "GROUND_SEGMENT"
+            ]
+          }
+        },
+        "indicators": {
+          "type": "array",
+          "description": "Indicators of compromise",
+          "items": {
+            "type": "object",
+            "required": ["type", "value"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Type of indicator",
+                "enum": [
+                  "IP_ADDRESS",
+                  "DOMAIN",
+                  "URL",
+                  "FILE_HASH",
+                  "COMMAND_SIGNATURE",
+                  "TRAFFIC_PATTERN",
+                  "BEHAVIORAL"
+                ]
+              },
+              "value": {
+                "type": "string",
+                "description": "Value of the indicator"
+              },
+              "confidence": {
+                "type": "number",
+                "description": "Confidence level for this indicator",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "attackVector": {
+          "type": "string",
+          "description": "Vector used for the attack",
+          "enum": [
+            "UPLINK_COMMAND",
+            "GROUND_SEGMENT",
+            "SUPPLY_CHAIN",
+            "INSIDER_THREAT",
+            "WIRELESS_COMMUNICATION",
+            "PHYSICAL_ACCESS",
+            "UNKNOWN"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the threat",
+          "enum": [
+            "DETECTED",
+            "ANALYZING",
+            "CONTAINED",
+            "MITIGATED",
+            "RESOLVED",
+            "ONGOING"
+          ]
+        },
+        "impact": {
+          "type": "object",
+          "description": "Impact assessment of the threat",
+          "properties": {
+            "operationalImpact": {
+              "type": "string",
+              "description": "Impact on spacecraft operations",
+              "enum": ["NONE", "MINOR", "MODERATE", "MAJOR", "CRITICAL"]
+            },
+            "dataImpact": {
+              "type": "string",
+              "description": "Impact on spacecraft data",
+              "enum": ["NONE", "MINOR", "MODERATE", "MAJOR", "CRITICAL"]
+            },
+            "missionImpact": {
+              "type": "string",
+              "description": "Impact on the overall mission",
+              "enum": ["NONE", "MINOR", "MODERATE", "MAJOR", "CRITICAL"]
+            },
+            "description": {
+              "type": "string",
+              "description": "Detailed description of the impact"
+            }
+          }
+        },
+        "mitigationActions": {
+          "type": "array",
+          "description": "Actions taken or recommended to mitigate the threat",
+          "items": {
+            "type": "object",
+            "required": ["action", "status"],
+            "properties": {
+              "action": {
+                "type": "string",
+                "description": "Mitigation action"
+              },
+              "status": {
+                "type": "string",
+                "description": "Status of the mitigation action",
+                "enum": ["RECOMMENDED", "IN_PROGRESS", "COMPLETED", "FAILED"]
+              },
+              "timestamp": {
+                "type": "string",
+                "description": "Time when the action was taken or recommended",
+                "format": "date-time"
+              },
+              "effectiveness": {
+                "type": "string",
+                "description": "Effectiveness of the mitigation action",
+                "enum": ["UNKNOWN", "LOW", "MEDIUM", "HIGH"]
+              }
+            }
+          }
+        },
+        "attribution": {
+          "type": "object",
+          "description": "Attribution information for the threat",
+          "properties": {
+            "actor": {
+              "type": "string",
+              "description": "Identified threat actor or group"
+            },
+            "confidence": {
+              "type": "number",
+              "description": "Confidence level in the attribution",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "motivation": {
+              "type": "string",
+              "description": "Assessed motivation for the attack",
+              "enum": [
+                "ESPIONAGE",
+                "SABOTAGE",
+                "FINANCIAL",
+                "HACKTIVISM",
+                "WARFARE",
+                "TESTING",
+                "UNKNOWN"
+              ]
+            }
+          }
+        },
+        "relatedThreats": {
+          "type": "array",
+          "description": "Related threat IDs that may be part of the same campaign",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional metadata about the cyber threat",
+          "properties": {
+            "detectionMethod": {
+              "type": "string",
+              "description": "Method used to detect the threat",
+              "enum": [
+                "SIGNATURE_BASED",
+                "ANOMALY_DETECTION",
+                "BEHAVIORAL_ANALYSIS",
+                "THREAT_INTELLIGENCE",
+                "MANUAL_DETECTION",
+                "HONEYPOT"
+              ]
+            },
+            "confidenceLevel": {
+              "type": "number",
+              "description": "Overall confidence level in the threat detection",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "tags": {
+              "type": "array",
+              "description": "Tags associated with this cyber threat",
+              "items": {
+                "type": "string"
+              }
+            },
+            "tlp": {
+              "type": "string",
+              "description": "Traffic Light Protocol marking for information sharing",
+              "enum": ["WHITE", "GREEN", "AMBER", "RED"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "header": {
+        "messageId": "550e8400-e29b-41d4-a716-446655440002",
+        "timestamp": "2023-05-01T14:30:00Z",
+        "source": "cyber-threat-detection-system",
+        "messageType": "cyber.threat",
+        "priority": "HIGH"
+      },
+      "payload": {
+        "threatId": "THREAT-2023-05-01-002",
+        "spacecraftId": "SAT-123",
+        "detectionTime": "2023-05-01T14:25:30Z",
+        "threatType": "COMMAND_INJECTION",
+        "severity": "HIGH",
+        "description": "Detected unauthorized command sequence attempting to modify attitude control parameters",
+        "affectedSystems": [
+          "COMMAND_AND_CONTROL",
+          "ATTITUDE_CONTROL"
+        ],
+        "indicators": [
+          {
+            "type": "COMMAND_SIGNATURE",
+            "value": "ATT_CTRL_MOD:0x45F2A1",
+            "confidence": 0.92
+          },
+          {
+            "type": "IP_ADDRESS",
+            "value": "198.51.100.23",
+            "confidence": 0.85
+          }
+        ],
+        "attackVector": "UPLINK_COMMAND",
+        "status": "CONTAINED",
+        "impact": {
+          "operationalImpact": "MODERATE",
+          "dataImpact": "MINOR",
+          "missionImpact": "MODERATE",
+          "description": "Temporary loss of precise attitude control, affecting science data collection for approximately 30 minutes"
+        },
+        "mitigationActions": [
+          {
+            "action": "Block command source IP",
+            "status": "COMPLETED",
+            "timestamp": "2023-05-01T14:26:15Z",
+            "effectiveness": "HIGH"
+          },
+          {
+            "action": "Reset attitude control parameters to known good state",
+            "status": "COMPLETED",
+            "timestamp": "2023-05-01T14:28:45Z",
+            "effectiveness": "HIGH"
+          },
+          {
+            "action": "Update command authentication requirements",
+            "status": "IN_PROGRESS",
+            "timestamp": "2023-05-01T14:35:00Z"
+          }
+        ],
+        "attribution": {
+          "actor": "APT-COSMOS",
+          "confidence": 0.75,
+          "motivation": "ESPIONAGE"
+        },
+        "relatedThreats": [
+          "THREAT-2023-04-15-005",
+          "THREAT-2023-04-28-001"
+        ],
+        "metadata": {
+          "detectionMethod": "BEHAVIORAL_ANALYSIS",
+          "confidenceLevel": 0.9,
+          "tags": ["command-injection", "apt-cosmos", "attitude-control"],
+          "tlp": "AMBER"
+        }
+      }
+    }
+  ]
+} 

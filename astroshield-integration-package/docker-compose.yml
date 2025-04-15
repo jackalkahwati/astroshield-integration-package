@@ -1,0 +1,127 @@
+version: '3.8'
+
+services:
+  # Kafka and Zookeeper for message streaming
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.0
+    container_name: astroshield-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    healthcheck:
+      test: ["CMD", "zkServer.sh", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  kafka:
+    image: confluentinc/cp-kafka:7.3.0
+    container_name: astroshield-kafka
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Schema Registry for Kafka message validation
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.3.0
+    container_name: astroshield-schema-registry
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka:9092
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
+  # Kafka UI for message monitoring and management
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: astroshield-kafka-ui
+    depends_on:
+      - kafka
+      - schema-registry
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: astroshield-local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081
+
+  # MongoDB for data persistence
+  mongodb:
+    image: mongo:6.0
+    container_name: astroshield-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: astroshield
+      MONGO_INITDB_ROOT_PASSWORD: astroshield_local
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MongoDB Express for database management
+  mongo-express:
+    image: mongo-express:latest
+    container_name: astroshield-mongo-express
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    ports:
+      - "8082:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: astroshield
+      ME_CONFIG_MONGODB_ADMINPASSWORD: astroshield_local
+      ME_CONFIG_MONGODB_URL: mongodb://astroshield:astroshield_local@mongodb:27017/
+
+  # Mock API server for simulating external services
+  mock-api:
+    image: mockserver/mockserver:latest
+    container_name: astroshield-mock-api
+    ports:
+      - "1080:1080"
+    environment:
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/mockserver-config.json
+    volumes:
+      - ./mock/config:/config
+
+  # Redis for caching and rate limiting
+  redis:
+    image: redis:7-alpine
+    container_name: astroshield-redis
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass redis_local
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "redis_local", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  mongodb_data:
+  redis_data: 

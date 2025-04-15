@@ -1,0 +1,219 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://astroshield.com/schemas/ss4.ccdm.detection.schema.json",
+  "title": "CCDM Detection Message",
+  "description": "Schema for Camouflage, Concealment, Deception, and Maneuvering (CCDM) detection messages",
+  "type": "object",
+  "required": ["header", "payload"],
+  "properties": {
+    "header": {
+      "type": "object",
+      "description": "Message header containing metadata",
+      "required": ["messageId", "timestamp", "source", "messageType", "traceId"],
+      "properties": {
+        "messageId": {
+          "type": "string",
+          "description": "Unique identifier for the message",
+          "format": "uuid"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Time when the message was generated",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "description": "System or component that generated the message"
+        },
+        "messageType": {
+          "type": "string",
+          "description": "Type of message",
+          "enum": ["ccdm.detection"]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority level of the message",
+          "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+        },
+        "traceId": {
+          "type": "string",
+          "description": "Trace identifier for tracking message lineage across the system",
+          "format": "uuid"
+        },
+        "parentMessageIds": {
+          "type": "array",
+          "description": "List of message IDs that triggered or contributed to this message",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Message payload containing CCDM detection data",
+      "required": ["detectionId", "objectId", "detectionTime", "ccdmType", "confidence"],
+      "properties": {
+        "detectionId": {
+          "type": "string",
+          "description": "Unique identifier for the CCDM detection"
+        },
+        "objectId": {
+          "type": "string",
+          "description": "Identifier of the object exhibiting CCDM behavior"
+        },
+        "detectionTime": {
+          "type": "string",
+          "description": "Time when the CCDM behavior was detected",
+          "format": "date-time"
+        },
+        "ccdmType": {
+          "type": "string",
+          "description": "Type of CCDM behavior detected",
+          "enum": [
+            "CAMOUFLAGE",
+            "CONCEALMENT",
+            "DECEPTION",
+            "MANEUVERING",
+            "MULTIPLE"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "description": "Confidence level in the detection (0.0 to 1.0)",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "indicators": {
+          "type": "array",
+          "description": "List of indicators that contributed to the detection",
+          "items": {
+            "type": "object",
+            "required": ["indicatorId", "indicatorType", "value", "confidence"],
+            "properties": {
+              "indicatorId": {
+                "type": "string",
+                "description": "Unique identifier for the indicator"
+              },
+              "indicatorType": {
+                "type": "string",
+                "description": "Type of indicator",
+                "enum": [
+                  "PATTERN_OF_LIFE_VIOLATION",
+                  "UNEXPECTED_MANEUVER",
+                  "SIGNATURE_CHANGE",
+                  "EMISSION_ANOMALY",
+                  "ORBITAL_PARAMETER_INCONSISTENCY",
+                  "REGISTRATION_DISCREPANCY",
+                  "DEPLOYMENT_ANOMALY",
+                  "PROXIMITY_OPERATION",
+                  "OTHER"
+                ]
+              },
+              "value": {
+                "type": "number",
+                "description": "Value of the indicator"
+              },
+              "confidence": {
+                "type": "number",
+                "description": "Confidence level for this indicator",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "description": {
+                "type": "string",
+                "description": "Human-readable description of the indicator"
+              }
+            }
+          }
+        },
+        "relatedObjects": {
+          "type": "array",
+          "description": "List of objects related to this CCDM detection",
+          "items": {
+            "type": "object",
+            "required": ["objectId", "relationshipType"],
+            "properties": {
+              "objectId": {
+                "type": "string",
+                "description": "Identifier of the related object"
+              },
+              "relationshipType": {
+                "type": "string",
+                "description": "Type of relationship to the primary object",
+                "enum": [
+                  "TARGET",
+                  "PARENT",
+                  "CHILD",
+                  "COMPANION",
+                  "OTHER"
+                ]
+              }
+            }
+          }
+        },
+        "evidenceData": {
+          "type": "object",
+          "description": "Evidence supporting the CCDM detection",
+          "properties": {
+            "observationIds": {
+              "type": "array",
+              "description": "List of observation IDs that contributed to this detection",
+              "items": {
+                "type": "string"
+              }
+            },
+            "stateVectorIds": {
+              "type": "array",
+              "description": "List of state vector IDs that contributed to this detection",
+              "items": {
+                "type": "string"
+              }
+            },
+            "maneuverIds": {
+              "type": "array",
+              "description": "List of maneuver IDs that contributed to this detection",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "assessment": {
+          "type": "object",
+          "description": "Assessment of the CCDM behavior",
+          "properties": {
+            "threatLevel": {
+              "type": "string",
+              "description": "Assessed threat level",
+              "enum": ["NONE", "LOW", "MEDIUM", "HIGH", "CRITICAL"]
+            },
+            "intentAssessment": {
+              "type": "string",
+              "description": "Assessment of the intent behind the CCDM behavior",
+              "enum": [
+                "BENIGN",
+                "UNCERTAIN",
+                "POTENTIALLY_HOSTILE",
+                "HOSTILE"
+              ]
+            },
+            "recommendedActions": {
+              "type": "array",
+              "description": "Recommended actions based on the detection",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Additional metadata about the CCDM detection",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+} 
