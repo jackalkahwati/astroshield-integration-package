@@ -207,7 +207,7 @@ pyerfa==2.0.1.4
 pyflakes==3.2.0
 Pygments==2.18.0
 pymc==5.19.1
-pymdown-extensions==10.12
+pymdown-extensions==10.15
 Pympler==1.0.1
 PyMySQL==1.1.1
 pyOpenSSL==24.2.1
