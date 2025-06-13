@@ -516,6 +516,206 @@ components:
           format: date-time
           example: "2023-05-01T12:00:00Z"
 
+    DashboardStatsResponse:
+      type: object
+      properties:
+        system_metrics:
+          type: object
+          properties:
+            system_health:
+              type: string
+              example: "96%"
+            active_tracks:
+              type: integer
+              example: 47
+            critical_alerts:
+              type: integer
+              example: 2
+            response_time:
+              type: string
+              example: "1.29s"
+        feature_rollup:
+          type: object
+          additionalProperties:
+            type: object
+          example:
+            satellite_tracking:
+              total_satellites: 47
+              operational: 45
+              threats: 2
+              primary_asset: "ISS (USA-317)"
+            ccdm_analysis:
+              indicators_passing: 5
+              total_indicators: 8
+              health_percentage: 87.5
+              latest_assessment: "2025-06-12T20:15:00Z"
+        recent_activities:
+          type: array
+          items:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              type:
+                type: string
+              message:
+                type: string
+              source:
+                type: string
+          example:
+            - timestamp: "2025-06-12T20:15:00Z"
+              type: "threat_detection"
+              message: "ASAT threat assessment processed - CRITICAL priority"
+              source: "Protection System"
+        system_status:
+          type: object
+          properties:
+            overall:
+              type: string
+              example: "OPERATIONAL"
+            subsystems:
+              type: object
+              additionalProperties:
+                type: string
+              example:
+                satellite_tracking: "OPERATIONAL"
+                event_processing: "WARNING"
+                protection_systems: "OPERATIONAL"
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-06-12T20:30:00Z"
+
+    SatellitesResponse:
+      type: object
+      properties:
+        satellites:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: "25544"
+              name:
+                type: string
+                example: "ISS"
+              altitude:
+                type: number
+                format: float
+                example: 408.5
+              status:
+                type: string
+                enum: [operational, debris, unknown]
+                example: "operational"
+              last_update:
+                type: string
+                format: date-time
+                example: "2025-06-12T20:00:00Z"
+        count:
+          type: integer
+          example: 2
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-06-12T20:30:00Z"
+
+    EventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: "550e8400-e29b-41d4-a716-446655440000"
+              type:
+                type: string
+                example: "maneuver_detected"
+              satellite_id:
+                type: string
+                example: "40109"
+              timestamp:
+                type: string
+                format: date-time
+                example: "2025-06-12T19:30:00Z"
+              details:
+                type: string
+                example: "Velocity change detected: 5.48 km/s"
+        count:
+          type: integer
+          example: 2
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-06-12T20:30:00Z"
+
+    KafkaTopicsResponse:
+      type: object
+      properties:
+        topics:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                example: "ss4.indicators.maneuvers-detected"
+              messages:
+                type: integer
+                example: 2063
+              partitions:
+                type: integer
+                example: 1
+        total_topics:
+          type: integer
+          example: 3
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-06-12T20:30:00Z"
+
+    KafkaMessageRequest:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          example: "test_message"
+        satellite_id:
+          type: string
+          example: "40109"
+        details:
+          type: string
+          example: "Manual test message from integration"
+
+    KafkaPublishResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "published"
+        message_id:
+          type: string
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        topic:
+          type: string
+          example: "ss6.response-recommendation.launch-asat-assessment"
+        partition:
+          type: integer
+          example: 0
+        offset:
+          type: integer
+          example: 240
+        timestamp:
+          type: string
+          format: date-time
+          example: "2025-06-12T20:30:00Z"
+
 paths:
   /health:
     get:
@@ -1172,6 +1372,137 @@ paths:
                 $ref: '#/components/schemas/Webhook'
         '400':
           description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/v1/dashboard/stats:
+    get:
+      summary: Get comprehensive dashboard statistics
+      description: |
+        Returns comprehensive system metrics, feature rollups, and status information
+        for the AstroShield command center dashboard. Includes real-time data from
+        all subsystems and recent activity feeds.
+      operationId: getDashboardStats
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: Dashboard statistics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardStatsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/v1/satellites:
+    get:
+      summary: Get satellite tracking data
+      description: Returns current satellite tracking information including operational status and threat assessments
+      operationId: getSatellites
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: Satellite data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SatellitesResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/v1/events:
+    get:
+      summary: Get recent system events
+      description: Returns recent events and activities across all AstroShield subsystems
+      operationId: getEvents
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: Events retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/v1/kafka/topics:
+    get:
+      summary: Get Kafka topic information
+      description: Returns information about active Kafka topics, message counts, and partitions
+      operationId: getKafkaTopics
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      responses:
+        '200':
+          description: Kafka topics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KafkaTopicsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/v1/kafka/publish:
+    post:
+      summary: Publish message to Kafka
+      description: Publishes a message to the AstroShield Kafka topics for event processing
+      operationId: publishKafkaMessage
+      security:
+        - bearerAuth: []
+        - apiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KafkaMessageRequest'
+      responses:
+        '200':
+          description: Message published successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KafkaPublishResponse'
+        '400':
+          description: Invalid message format
           content:
             application/json:
               schema:

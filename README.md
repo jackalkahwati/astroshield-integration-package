@@ -61,6 +61,22 @@ This integration package provides all the necessary resources for integrating wi
 
 3. Use the Python example in `examples/python/api_client.py` as a reference for implementing your own API client.
 
+4. For comprehensive dashboard integration, see `examples/python/dashboard_client.py` which demonstrates how to use the enhanced monitoring endpoints.
+
+### Enhanced Dashboard Integration
+
+The new dashboard endpoints provide comprehensive system monitoring capabilities:
+
+1. **Dashboard Statistics**: Use `/api/v1/dashboard/stats` to get real-time system metrics, feature rollups, and status information for all AstroShield subsystems.
+
+2. **Satellite Tracking**: Access current satellite data via `/api/v1/satellites` for operational status and threat assessments.
+
+3. **Event Monitoring**: Monitor system events with `/api/v1/events` to track activities across all subsystems.
+
+4. **Kafka Integration**: Use `/api/v1/kafka/topics` for topic health monitoring and `/api/v1/kafka/publish` for message publishing.
+
+5. **Real-time Monitoring**: Implement continuous monitoring using the Python client example in `examples/python/dashboard_client.py`.
+
 ### Kafka Integration
 
 1. Review the JSON Schema definitions in the `schemas/` directory to understand the structure of messages for each Kafka topic.
@@ -226,9 +242,20 @@ If you encounter any issues or have questions about integrating with AstroShield
 
 ## Version Information
 
-- Integration Package Version: 1.0.0
+- Integration Package Version: 1.1.0
 - API Version: v1
-- Last Updated: 2024-03-12
+- Last Updated: 2025-06-12
+
+### Version 1.1.0 (2025-06-12)
+- **NEW**: Enhanced Dashboard API endpoints for comprehensive system monitoring
+- **NEW**: `/api/v1/dashboard/stats` - Comprehensive dashboard statistics with feature rollups
+- **NEW**: `/api/v1/satellites` - Satellite tracking data and status information  
+- **NEW**: `/api/v1/events` - Recent system events and activities
+- **NEW**: `/api/v1/kafka/topics` - Kafka topic information and health metrics
+- **NEW**: `/api/v1/kafka/publish` - Message publishing to Kafka topics
+- **NEW**: Python dashboard client example (`examples/python/dashboard_client.py`)
+- **UPDATED**: OpenAPI specification with new endpoint definitions and schemas
+- **ENHANCED**: Real-time monitoring capabilities for system health and metrics
 
 ## License
 
